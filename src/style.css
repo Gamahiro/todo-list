@@ -35,3 +35,11 @@ background-color: gray;
     height: 300px;
     justify-content: space-between;
   }
+
+  .card {
+    background-color: darkgray;
+    display: flex;
+    flex-direction: column;
+    margin: 5px;
+    border: 2px white solid;
+  }

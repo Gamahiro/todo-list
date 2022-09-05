@@ -1,10 +1,12 @@
 import { createTask } from ".";
 
-const newDiv = document.createElement('div');
+const newForm = document.createElement('div');
+const submit = document.createElement('div');
+const newCard = document.createElement('div');
 const content = document.querySelector('.content');
 
 function createForm () {
-    let divForm = newDiv;
+    let divForm = newForm;
     divForm.innerHTML = form;
     content.append(divForm);
     
@@ -17,8 +19,49 @@ function createForm () {
             document.querySelector('#priority').value,
             document.querySelector('#dateTime').value
         )
+        let divSubmitted = submit;
+        divSubmitted.textContent = 'Submitted';
+        content.appendChild(divSubmitted);
     }
 }
+
+function appendToProject(defaultProject) {
+
+    let project = defaultProject;
+
+        project.forEach(function(value, i) {
+  
+        let card = newCard;
+        card.className = 'card';
+        card.id = 'card' + i;
+    
+        let title = document.createElement('div');
+        title.innerHTML = `Title: ${value.taskTitle}`;
+        title.className = 'cardTitle';
+        card.appendChild(title);
+    
+        let description = document.createElement('div');
+        description.innerHTML = `Description: ${value.taskDescription}`;
+        description.className = 'cardDescription';
+        card.appendChild(description);
+    
+        let priority = document.createElement('div');
+        priority.innerHTML = `Priority: ${value.taskPriority}`;
+        priority.className = 'cardPriority';
+        card.appendChild(priority);
+    
+        let dateTime = document.createElement('div');
+        dateTime.innerHTML = `Time and Date: ${value.taskTimeDate}`;
+        dateTime.className = 'cardDateTime';
+        card.appendChild(dateTime);
+    
+        content.append(card);
+    
+    });
+
+}
+
+
 
 const form = `<form>
 <label for="title">Title:</label>
@@ -48,4 +91,4 @@ const form = `<form>
 <input type="submit" value="submit">
 </form>`;
 
-export {createForm};
+export {createForm, appendToProject};

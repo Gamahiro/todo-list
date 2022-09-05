@@ -1,6 +1,6 @@
 import './style.css';
 import { taskFactory } from './factory/taskFactory';
-import { createForm } from './htmlGenerator';
+import { createForm, appendToProject } from './htmlGenerator';
 
 
 const defaultProject = [];
@@ -16,10 +16,10 @@ function createTask(taskTitle, taskDescription, taskPriority, taskTimeDate, proj
         project = defaultProject;
     }
     project.push(newTask);
+    appendToProject(project);
     console.log(project);
 }
 
-createTask('Dentist', 'At 123 road', '1', '2pm');
 
 document.querySelector('.addTask').addEventListener('click', () => {
     
