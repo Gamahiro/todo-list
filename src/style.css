@@ -1,45 +1,54 @@
 @font-face {
-    font-family: 'Roboto';
-    src: url('./Roboto/Roboto-Black.ttf') format('ttf'),
-      url('./Roboto/Roboto-BlackItalic.ttf') format('ttf');
-    font-weight: 600;
-    font-style: normal;
-  }
-
-  body {
-    background-color: darkgray;
-  }
-
-  .content {
-    font-family: 'Roboto';
-background-color: gray;
+  font-family: 'Roboto';
+  src: url('./Roboto/Roboto-Black.ttf') format('ttf'),
+    url('./Roboto/Roboto-BlackItalic.ttf') format('ttf');
+  font-weight: 600;
+  font-style: normal;
 }
 
-  .addTask {
-    color: white;
-    background-color: green;
-    border: 2px solid white;
-    width: 20px;
-    height: 20px;
-    text-align: center;
-  }
+body {
+  background-color: darkgray;
+}
 
-  .addTask:hover {
-    cursor: pointer;
-  }
+.content {
+  font-family: 'Roboto';
+  background-color: gray;
+}
 
-  form {
-    display: flex;
-    flex-direction: column;
-    width: 300px;
-    height: 300px;
-    justify-content: space-between;
-  }
+.addTask {
+  color: white;
+  background-color: green;
+  border: 2px solid white;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+}
 
-  .card {
-    background-color: darkgray;
-    display: flex;
-    flex-direction: column;
-    margin: 5px;
-    border: 2px white solid;
-  }
+.addTask:hover {
+  cursor: pointer;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  height: 300px;
+  justify-content: space-between;
+}
+
+.tasks {
+  display: grid;
+  grid-template-columns: 190px 190px 190px 190px;
+width: 800px;
+}
+
+.card {
+  background-color: darkgray;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 150px;
+  padding: 3px;
+  margin: 5px;
+  border: 2px white solid;
+}

@@ -1,5 +1,5 @@
 import './style.css';
-import { taskFactory } from './factory/taskFactory';
+import { taskFactory } from './factory/taskFactory.js';
 import { createForm, appendToProject } from './htmlGenerator';
 
 
