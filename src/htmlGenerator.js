@@ -5,13 +5,14 @@ const addTask = document.querySelector('.addTask');
 
 function createForm() {
     const divForm = document.createElement('div');
+    divForm.className = 'divForm';
     divForm.innerHTML = form;
     content.append(divForm);
-    addTask.style.display = 'none';
+    addTask.style.visibility = 'hidden';
 
     content.insertBefore(divForm, content.firstChild);
 
-    document.querySelector('form').onsubmit = function (e) {
+    document.querySelector('#taskForm').onsubmit = function (e) {
         e.preventDefault();
 
         createTask(
@@ -23,8 +24,6 @@ function createForm() {
        /*  let divSubmitted = document.createElement('div');
         divSubmitted.textContent = 'Submitted';
         content.appendChild(divSubmitted); */
-        content.removeChild(divForm);
-        addTask.style.display = 'block';
     }
 }
 
@@ -74,9 +73,9 @@ function appendToProject(defaultProject) {
 
 // 2022-09-07T09:42
 
-const form = `<form>
+const form = `<form id ="taskForm">
 <label for="title">Title:</label>
-<input type="text" id="title" name="title" required>
+<input type="text" id="title" name="title" >
 
 <label for="description">Description:</label>
 <input type="text" id="description" name="description">
@@ -90,7 +89,7 @@ const form = `<form>
 </select>
 
 <label for="dateTime">Time and Date:</label>
-<input type="datetime-local" id="dateTime" name="dateTime" value="" required>
+<input type="datetime-local" id="dateTime" name="dateTime" value="" >
 
 
 
@@ -99,7 +98,7 @@ const form = `<form>
     <option value="default">Default Project</option>
 </select>
 
-<input type="submit" value="submit">
+<input type="submit" value="Submit" id="submitForm">
 </form>`;
 
 export { createForm, appendToProject };

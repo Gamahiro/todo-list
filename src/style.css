@@ -10,9 +10,50 @@ body {
   background-color: darkgray;
 }
 
+.site {
+display: grid;
+grid-template-columns: 100px 1000px;
+grid-template-rows: 50px 1050px;
+}
+
+.navbar {
+  height: 50px;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 2;
+}
+
+.navbarList {
+display: flex;
+justify-content: space-around;
+list-style: none;
+}
+
+.sidebar{
+width: 100px;
+grid-column-start: 1;
+grid-column-end: 2;
+grid-row-start: 2;
+grid-row-end: 3;
+}
+
+.sidebarList {
+display: flex;
+flex-direction: column;
+justify-content: space-around;
+list-style: none;
+}
+
 .content {
   font-family: 'Roboto';
   background-color: gray;
+  border: 2px solid black;
+
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 2;
+  grid-row-end: 3;
 }
 
 .addTask {
@@ -28,18 +69,35 @@ body {
   cursor: pointer;
 }
 
-form {
+.divForm {
   display: flex;
-  flex-direction: column;
-  width: 300px;
-  height: 300px;
+  justify-content: center;
+  align-items: center;
+  height: 150px;
+  
+}
+
+#submitForm:hover {
+  cursor: pointer;
+}
+
+form {
+  display: grid;
+  grid-template-columns: 150px 150px 150px 150px;
+  grid-template-rows: 25px 25px 25px;
+  gap: 5px;
+  padding: 5px;
+  width: 620px;
   justify-content: space-between;
+  border: 2px solid black;
 }
 
 .tasks {
   display: grid;
   grid-template-columns: 190px 190px 190px 190px;
-width: 800px;
+width: 978px;
+border-top: 2px black solid;
+padding: 10px;
 }
 
 .card {
