@@ -1,14 +1,14 @@
 import { createTask } from ".";
 const content = document.querySelector('.content');
 const tasks = document.querySelector('.tasks');
-const addTask = document.querySelector('.addTask');
 
+
+//@todo fix multiplying form
 function createForm() {
     const divForm = document.createElement('div');
     divForm.className = 'divForm';
     divForm.innerHTML = form;
     content.append(divForm);
-    addTask.style.visibility = 'hidden';
 
     content.insertBefore(divForm, content.firstChild);
 
@@ -21,9 +21,7 @@ function createForm() {
             document.querySelector('#priority').value,
             document.querySelector('#dateTime').value
         )
-       /*  let divSubmitted = document.createElement('div');
-        divSubmitted.textContent = 'Submitted';
-        content.appendChild(divSubmitted); */
+       
     }
 }
 

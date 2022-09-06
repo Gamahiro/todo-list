@@ -12,8 +12,8 @@ body {
 
 .site {
 display: grid;
-grid-template-columns: 100px 1000px;
-grid-template-rows: 50px 1050px;
+grid-template-columns: 150px minmax(85%, 950px) ;
+grid-template-rows: 50px minmax(100%, 1150px);
 }
 
 .navbar {
@@ -43,6 +43,8 @@ display: flex;
 flex-direction: column;
 justify-content: space-around;
 list-style: none;
+padding-left: 0;
+margin-left: 8px;
 }
 
 .content {
@@ -94,8 +96,9 @@ form {
 
 .tasks {
   display: grid;
-  grid-template-columns: 190px 190px 190px 190px;
-width: 978px;
+  grid-template-columns: 190px 190px 190px 190px 190px;
+  justify-content: center;
+width: minmax(100%, 978px);
 border-top: 2px black solid;
 padding: 10px;
 }
