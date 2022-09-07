@@ -47,6 +47,10 @@ padding-left: 0;
 margin-left: 8px;
 }
 
+#projects li{
+  list-style: none;
+}
+
 .content {
   font-family: 'Roboto';
   background-color: gray;

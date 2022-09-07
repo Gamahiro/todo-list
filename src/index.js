@@ -1,16 +1,19 @@
 import './style.css';
 import { taskFactory } from './factory/taskFactory.js';
-import { createForm, appendToProject } from './htmlGenerator';
+import { createForm, appendTask, appendProjects, addProjectFormOptions } from './htmlGenerator';
 import { projectFactory } from './factory/projectFactory';
 
 /* const defaultProject = []; */
 
-const projects = [];
-console.log(projects);
-projects.push(createProject('Default Project'));
 
-function createProject(name) {
-    let newProject = projectFactory(name);
+const projects = [];
+
+
+
+
+
+function createProject(projectName) {
+    let newProject = projectFactory(projectName);
     projects.push(newProject);
 }
 
@@ -22,11 +25,8 @@ function createTask(taskTitle, taskDescription, taskPriority, taskTimeDate, proj
     if (project == undefined) {
         project = projects[0].project;
     }
-    project.push(newTask);
-    appendToProject(project);
-    console.log(project);
-console.log(projects);
-
+     project.push(newTask);
+    appendTask(project);
 }
 
 
@@ -35,9 +35,13 @@ document.querySelector('.addTask').addEventListener('click', () => {
     createForm();
 });
 
+function init() {
+createProject('Default Project', 'Default Project');
+createProject('New Project', 'For planning event');
+appendProjects(projects);
+}
 
-createProject('test');
-createTask('test', 'testing descr', 2, '', projects[2].project);
+init();
 
 
-export { createTask };
+export { createTask, createProject, projects };

@@ -1,8 +1,8 @@
-const projectFactory = (name) => {
+const projectFactory = (name, description) => {
 
     let project = [];
 
-    return {project, name};
+    return {name, description, project};
 }
 
 export {projectFactory};

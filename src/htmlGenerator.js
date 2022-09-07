@@ -1,14 +1,13 @@
-import { createTask } from ".";
+import { createTask, createProject} from ".";
 const content = document.querySelector('.content');
 const tasks = document.querySelector('.tasks');
+const newProjectBtn = document.querySelector('#newProjectBtn');
+const divForm = document.querySelector('.divForm');
 
 
 //@todo fix multiplying form
 function createForm() {
-    const divForm = document.createElement('div');
-    divForm.className = 'divForm';
-    divForm.innerHTML = form;
-    content.append(divForm);
+    divForm.innerHTML = taskForm;
 
     content.insertBefore(divForm, content.firstChild);
 
@@ -21,19 +20,19 @@ function createForm() {
             document.querySelector('#priority').value,
             document.querySelector('#dateTime').value
         )
-       
+
     }
 }
 
-function appendToProject(defaultProject) {
+function appendTask(project) {
 
-    let project = defaultProject;
+    console.log(project);
 
-        let child = tasks.lastElementChild;
-        while (child) {
-            tasks.removeChild(child);
-            child = tasks.lastElementChild;
-        }
+    let child = tasks.lastElementChild;
+    while (child) {
+        tasks.removeChild(child);
+        child = tasks.lastElementChild;
+    }
 
     project.forEach(function (value, i) {
 
@@ -67,11 +66,63 @@ function appendToProject(defaultProject) {
 
 }
 
+function appendProjects(project) {
+    
+    const projectList = document.querySelector('#projects');
+    
+    let child = projectList.lastElementChild;
+    while (child) {
+        projectList.removeChild(child);
+        child = projectList.lastElementChild;
+    }
+
+    for (let i = project.length - 1; i >= 0; i--) {
+
+        console.log(project[i].name);
+
+        let projectListElement = document.createElement('li');
+        projectListElement.textContent = `${project[i].name}`;
+        projectListElement.className = 'projectListElement';
+        console.log();
+        projectList.appendChild(projectListElement);
+
+
+        projectListElement.addEventListener('click', () => {
+            appendTask(project[i].project);
+        });
+    }
+} 
+
+newProjectBtn.addEventListener('click', () => {
+    divForm.innerHTML = projectForm;
+
+    document.querySelector('#projectForm').onsubmit = function (e) {
+        e.preventDefault();
+
+        createProject(
+            document.querySelector('#title').value,
+            document.querySelector('#description').value,
+        )
+        appendProjects(projects);            
+        }
+});
 
 
 // 2022-09-07T09:42
 
-const form = `<form id ="taskForm">
+let formOptions = ``;
+let defaultProject;
+
+function addProjectFormOptions(project) {
+console.log(project);
+defaultProject = project[0];
+    project.forEach((element) => {
+        formOptions += `<option value="${element.name.replace(/\s/g, '')}">${element.name}</option>`;
+    })
+}
+
+
+const taskForm = `<form id ="taskForm">
 <label for="title">Title:</label>
 <input type="text" id="title" name="title" >
 
@@ -92,11 +143,22 @@ const form = `<form id ="taskForm">
 
 
 <label for="project"></label>
-<select id="project" name="project" value="Default Project">
-    <option value="default">Default Project</option>
+<select id="project" name="project" value="${defaultProject}">
+    ${formOptions}
 </select>
 
 <input type="submit" value="Submit" id="submitForm">
 </form>`;
 
-export { createForm, appendToProject };
+const projectForm = `<form id ="projectForm">
+<label for="title">Title:</label>
+<input type="text" id="title" name="title" >
+
+<label for="description">Description:</label>
+<input type="text" id="description" name="description">
+<input type="submit" value="Submit" id="submitForm">
+</form>`;
+
+
+
+export { createForm, appendTask, appendProjects, addProjectFormOptions };
