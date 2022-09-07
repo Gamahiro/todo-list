@@ -1,8 +1,8 @@
 import './style.css';
 import { taskFactory } from './factory/taskFactory.js';
-import { createForm, appendTask, appendProjects, addProjectFormOptions } from './htmlGenerator';
+import { createForm, appendTask, appendProjects } from './htmlGenerator';
 import { projectFactory } from './factory/projectFactory';
-import { storageAvailable, saveProjects, loadProjects } from './localStorage';
+import { saveProjects, loadProjects } from './localStorage';
 
 /* const defaultProject = []; */
 

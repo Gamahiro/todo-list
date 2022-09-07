@@ -1,4 +1,4 @@
-import { createTask, createProject, projects} from ".";
+import { createTask, createProject, projects } from ".";
 const content = document.querySelector('.content');
 const tasks = document.querySelector('.tasks');
 const newProjectBtn = document.querySelector('#newProjectBtn');
@@ -67,9 +67,9 @@ function appendTask(project) {
 }
 
 function appendProjects(project) {
-    
+
     const projectList = document.querySelector('#projects');
-    
+
     let child = projectList.lastElementChild;
     while (child) {
         projectList.removeChild(child);
@@ -89,7 +89,7 @@ function appendProjects(project) {
             appendTask(project[i].project);
         });
     }
-} 
+}
 
 newProjectBtn.addEventListener('click', () => {
     divForm.innerHTML = projectForm;
@@ -101,16 +101,27 @@ newProjectBtn.addEventListener('click', () => {
             document.querySelector('#title').value,
             document.querySelector('#description').value,
         )
-        appendProjects(projects);            
-        }
+        appendProjects(projects);
+    }
 });
 
+document.querySelector('#projectsBtn').addEventListener('click', toggleHideProjects);
 
-// 2022-09-07T09:42
+function toggleHideProjects() {
+    let projectsList = document.querySelector('#projects');
+
+    if (projectsList.style.display != 'none') {
+        projectsList.style.display = 'none';
+    }
+ else {
+    projectsList.style.display = 'block';
+}
+
+}
 
 
 function addProjectFormOptions() {
-let formOptions = ``;
+    let formOptions = ``;
 
     projects.forEach((element, i) => {
         formOptions += `<option value="${i}">${element.name}</option>`;
@@ -118,7 +129,7 @@ let formOptions = ``;
 
     let taskForm = `<form id ="taskForm">
 <label for="title">Title:</label>
-<input type="text" id="title" name="title" >
+<input type="text" id="title" name="title" required>
 
 <label for="description">Description:</label>
 <input type="text" id="description" name="description">
@@ -144,7 +155,7 @@ let formOptions = ``;
 <input type="submit" value="Submit" id="submitForm">
 </form>`;
 
-return taskForm;
+    return taskForm;
 }
 
 
@@ -153,7 +164,7 @@ return taskForm;
 
 const projectForm = `<form id ="projectForm">
 <label for="title">Title:</label>
-<input type="text" id="title" name="title" >
+<input type="text" id="title" name="title" required>
 
 <label for="description">Description:</label>
 <input type="text" id="description" name="description">
@@ -162,4 +173,4 @@ const projectForm = `<form id ="projectForm">
 
 
 
-export { createForm, appendTask, appendProjects, addProjectFormOptions };
+export { createForm, appendTask, appendProjects };

@@ -23,18 +23,6 @@ function storageAvailable(type) {
     }
 }
 
-/* 
-
-
-  if (!localStorage.getItem('bgcolor')) {
-  populateStorage();
-} else {
-  setStyles();
-}
-
-
-   */
-
 
 function saveProjects(project) {
 
