@@ -1,4 +1,4 @@
-import { createTask, createProject} from ".";
+import { createTask, createProject, projects} from ".";
 const content = document.querySelector('.content');
 const tasks = document.querySelector('.tasks');
 const newProjectBtn = document.querySelector('#newProjectBtn');
@@ -7,7 +7,7 @@ const divForm = document.querySelector('.divForm');
 
 //@todo fix multiplying form
 function createForm() {
-    divForm.innerHTML = taskForm;
+    divForm.innerHTML = addProjectFormOptions();
 
     content.insertBefore(divForm, content.firstChild);
 
@@ -18,7 +18,8 @@ function createForm() {
             document.querySelector('#title').value,
             document.querySelector('#description').value,
             document.querySelector('#priority').value,
-            document.querySelector('#dateTime').value
+            document.querySelector('#dateTime').value,
+            projects[document.querySelector('#project').value].project
         )
 
     }
@@ -110,19 +111,16 @@ newProjectBtn.addEventListener('click', () => {
 
 // 2022-09-07T09:42
 
+
+function addProjectFormOptions() {
 let formOptions = ``;
-let defaultProject;
 
-function addProjectFormOptions(project) {
-console.log(project);
-defaultProject = project[0];
-    project.forEach((element) => {
-        formOptions += `<option value="${element.name.replace(/\s/g, '')}">${element.name}</option>`;
+    projects.forEach((element, i) => {
+        console.log(element);
+        formOptions += `<option value="${i}">${element.name}</option>`;
     })
-}
 
-
-const taskForm = `<form id ="taskForm">
+    let taskForm = `<form id ="taskForm">
 <label for="title">Title:</label>
 <input type="text" id="title" name="title" >
 
@@ -143,12 +141,19 @@ const taskForm = `<form id ="taskForm">
 
 
 <label for="project"></label>
-<select id="project" name="project" value="${defaultProject}">
+<select id="project" name="project">
     ${formOptions}
 </select>
 
 <input type="submit" value="Submit" id="submitForm">
 </form>`;
+
+return taskForm;
+}
+
+
+
+
 
 const projectForm = `<form id ="projectForm">
 <label for="title">Title:</label>

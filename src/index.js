@@ -12,8 +12,8 @@ const projects = [];
 
 
 
-function createProject(projectName) {
-    let newProject = projectFactory(projectName);
+function createProject(projectName, projectDescription) {
+    let newProject = projectFactory(projectName, projectDescription);
     projects.push(newProject);
 }
 
