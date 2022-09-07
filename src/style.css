@@ -12,13 +12,13 @@ body {
 
 .site {
 display: grid;
-grid-template-columns: 150px minmax(85%, 950px) ;
-grid-template-rows: 50px minmax(100%, 1150px);
+grid-template-columns: 200px minmax(85%, 900px) ;
+grid-template-rows: 100px minmax(100%, 1050px);
 }
 
 .navbar {
-  height: 50px;
-  grid-column-start: 1;
+  height: 150px;
+  grid-column-start: 2;
   grid-column-end: 3;
   grid-row-start: 1;
   grid-row-end: 2;
@@ -28,10 +28,22 @@ grid-template-rows: 50px minmax(100%, 1150px);
 display: flex;
 justify-content: space-around;
 list-style: none;
+width: 400px;
+}
+
+.navbarList li {
+  background-color: aliceblue;
+  padding: 5px 15px 5px 15px;
+  border: 2px solid black;
+  border-radius: 5px;
+}
+
+.navbarList li:hover {
+  cursor: pointer;
 }
 
 .sidebar{
-width: 100px;
+width: 140px;
 grid-column-start: 1;
 grid-column-end: 2;
 grid-row-start: 2;
@@ -47,8 +59,23 @@ padding-left: 0;
 margin-left: 8px;
 }
 
+.sidebarList li {
+  background-color: aliceblue;
+  padding: 5px 15px 5px 15px;
+  border: 2px solid black;
+  border-radius: 5px;
+}
+
+#projects {
+  padding: 0;
+}
+
 #projects li{
   list-style: none;
+  background-color: rgb(195, 204, 211);
+  padding: 5px 15px 5px 15px;
+  border: 2px solid black;
+  border-radius: 5px;
 }
 
 .content {
