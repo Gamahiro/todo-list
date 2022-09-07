@@ -27,7 +27,6 @@ function createForm() {
 
 function appendTask(project) {
 
-    console.log(project);
 
     let child = tasks.lastElementChild;
     while (child) {
@@ -79,12 +78,10 @@ function appendProjects(project) {
 
     for (let i = project.length - 1; i >= 0; i--) {
 
-        console.log(project[i].name);
 
         let projectListElement = document.createElement('li');
         projectListElement.textContent = `${project[i].name}`;
         projectListElement.className = 'projectListElement';
-        console.log();
         projectList.appendChild(projectListElement);
 
 
@@ -116,7 +113,6 @@ function addProjectFormOptions() {
 let formOptions = ``;
 
     projects.forEach((element, i) => {
-        console.log(element);
         formOptions += `<option value="${i}">${element.name}</option>`;
     })
 
