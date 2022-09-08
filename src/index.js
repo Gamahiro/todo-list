@@ -41,8 +41,9 @@ document.querySelector('.addTask').addEventListener('click', () => {
 
 });
 
-
-
+function updateProjects() {
+    saveProjects(projects);
+}
 
 
 function init() {
@@ -59,4 +60,4 @@ function init() {
 init();
 
 
-export { createTask, createProject, projects };
+export { createTask, createProject, projects, updateProjects };

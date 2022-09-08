@@ -1,4 +1,5 @@
-import { createTask, createProject, projects } from ".";
+import { createTask, createProject, projects, updateProjects } from ".";
+import { saveProjects } from "./localStorage";
 const content = document.querySelector('.content');
 const tasks = document.querySelector('.tasks');
 const newProjectBtn = document.querySelector('#newProjectBtn');
@@ -62,9 +63,22 @@ function appendTask(project) {
 
         tasks.appendChild(card);
 
-    });
+        let btn = document.createElement('button');
+        btn.className = 'rmTaskBtn';
+        btn.textContent = 'Remove Task';
+        btn.id = 'rmbtn' + i;
+        card.appendChild(btn);
 
+        btn.addEventListener('click', () => {
+            
+            project.splice(i, 1);
+            tasks.removeChild(card);
+            updateProjects();
+        });
+
+    });
 }
+
 
 function appendProjects(project) {
 
@@ -87,6 +101,22 @@ function appendProjects(project) {
 
         projectListElement.addEventListener('click', () => {
             appendTask(project[i].project);
+
+            let projectContainer = document.createElement('div');
+            let projectDisplayedName = document.createElement('div');
+            let projectDisplayedDescr = document.createElement('p');
+
+            projectContainer.className = 'projectContainer';
+            divForm.innerHTML = '';
+
+
+            projectDisplayedName.textContent = project[i].name;
+            projectDisplayedDescr.textContent = project[i].description;
+
+            projectContainer.appendChild(projectDisplayedName);
+            projectContainer.appendChild(projectDisplayedDescr);
+            divForm.appendChild(projectContainer);
+
         });
     }
 }
@@ -105,7 +135,16 @@ newProjectBtn.addEventListener('click', () => {
     }
 });
 
-document.querySelector('#projectsBtn').addEventListener('click', toggleHideProjects);
+document.querySelector('#projectsBtn').addEventListener('click', function (e) {
+
+    if (e.target !== this)
+        return;
+
+    toggleHideProjects();
+
+});
+
+
 
 function toggleHideProjects() {
     let projectsList = document.querySelector('#projects');
@@ -113,9 +152,9 @@ function toggleHideProjects() {
     if (projectsList.style.display != 'none') {
         projectsList.style.display = 'none';
     }
- else {
-    projectsList.style.display = 'block';
-}
+    else {
+        projectsList.style.display = 'block';
+    }
 
 }
 
