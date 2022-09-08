@@ -1,4 +1,4 @@
-import { createTask, createProject, projects, updateProjects } from ".";
+import { createTask, createProject, projects, updateProjects, compareTasks } from ".";
 import { saveProjects } from "./localStorage";
 const content = document.querySelector('.content');
 const tasks = document.querySelector('.tasks');
@@ -28,6 +28,7 @@ function createForm() {
 
 function appendTask(project) {
 
+    project.sort(compareTasks);
 
     let child = tasks.lastElementChild;
     while (child) {

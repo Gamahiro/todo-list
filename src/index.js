@@ -45,6 +45,16 @@ function updateProjects() {
     saveProjects(projects);
 }
 
+function compareTasks(taskA, taskB) {
+    if (taskA.taskTimeDate < taskB.taskTimeDate) {
+        return -1;
+    }
+    if (taskA.taskTimeDate < taskB.taskTimeDate) {
+        return 1;
+    }
+    return 0;
+}
+
 
 function init() {
     if (!localStorage.getItem('projects')) {
@@ -60,4 +70,4 @@ function init() {
 init();
 
 
-export { createTask, createProject, projects, updateProjects };
+export { createTask, createProject, projects, updateProjects, compareTasks };
