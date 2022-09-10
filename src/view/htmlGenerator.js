@@ -1,12 +1,10 @@
-import { createTask, createProject, projects, updateProjects, compareTasks } from ".";
-import { saveProjects } from "./localStorage";
+import { createTask, createProject, projects, updateProjects, compareTasks } from "..";
 const content = document.querySelector('.content');
 const tasks = document.querySelector('.tasks');
 const newProjectBtn = document.querySelector('#newProjectBtn');
 const divForm = document.querySelector('.divForm');
 
 
-//@todo fix multiplying form
 function createForm() {
     divForm.innerHTML = addProjectFormOptions();
 
@@ -144,16 +142,6 @@ newProjectBtn.addEventListener('click', () => {
     }
 });
 
-document.querySelector('#projectsBtn').addEventListener('click', function (e) {
-
-    if (e.target !== this)
-        return;
-
-    toggleHideProjects();
-
-});
-
-
 
 function toggleHideProjects() {
     let projectsList = document.querySelector('#projects');
@@ -166,7 +154,14 @@ function toggleHideProjects() {
     }
 
 }
+document.querySelector('#projectsBtn').addEventListener('click', function (e) {
 
+    if (e.target !== this)
+        return;
+
+    toggleHideProjects();
+
+});
 
 function addProjectFormOptions() {
     let formOptions = ``;
@@ -221,4 +216,4 @@ const projectForm = `<form id ="projectForm">
 
 
 
-export { createForm, appendTask, appendProjects };
+export { createForm, appendTask, appendProjects};
