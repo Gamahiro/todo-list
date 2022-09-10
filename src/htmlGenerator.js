@@ -41,6 +41,14 @@ function appendTask(project) {
         let card = document.createElement('div');
         card.className = 'card';
         card.id = 'card' + i;
+        let cardId = card.id;
+        console.log(value.taskPriority);
+        if(value.taskPriority === '1') {
+            card.style.border = '2px solid red';
+        }
+        else if (value.taskPriority === '2') {
+            card.style.border = '2px solid yellow';
+        }
 
         let title = document.createElement('div');
         title.innerHTML = `Title: ${value.taskTitle}`;
