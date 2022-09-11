@@ -1,29 +1,44 @@
 
+
+//main array, holds projects
 let projects = [];
 
-function createProject(projectName, projectDescription) {
+
+
+
+function modelNewProject(projectName, projectDescription) {
+
     let newProject = projectFactory(projectName, projectDescription);
-
     projects.push(newProject);
-    saveProjects(projects);
-
+    return newProject;
 }
 
+function modelEditProject(project, newName, newDescription) {
+    if (newName === undefined) {
+        newName = project.name;
+    }
+    if (newDescription === undefined) {
+        newDescription = project.description;
+    }
+    project.name = newName;
+    project.description = newDescription;
+    return project;
+}
 
-function createTask(taskTitle, taskDescription, taskPriority, taskTimeDate, project) {
+function modelNewTask(taskTitle, taskDescription, taskPriority, taskTimeDate, project) {
 
     let newTask = taskFactory(taskTitle, taskDescription, taskPriority, taskTimeDate);
     if (project == undefined) {
         project = projects[0].project;
     }
     project.push(newTask);
-    appendTask(project);
-    saveProjects(projects);
 }
 
-function updateProjects() {
-    saveProjects(projects);
+function modelEditTask(task) {
+
+
 }
+
 
 function compareTasks(taskA, taskB) {
     if (taskA.taskTimeDate < taskB.taskTimeDate) {
@@ -34,3 +49,5 @@ function compareTasks(taskA, taskB) {
     }
     return 0;
 }
+
+export {modelNewProject, modelNewTask, modelEditProject};

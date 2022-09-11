@@ -35,4 +35,13 @@ function loadProjects() {
     return currentProject;
 }
 
-export { storageAvailable, loadProjects, saveProjects };
+function saveCheck(){
+if (!localStorage.getItem('projects')) {
+    modelNewProject('Default Project', 'The default project');
+    saveProjects(projects);
+  } else {
+    projects = loadProjects();
+  }}
+
+
+export { storageAvailable, loadProjects, saveProjects, saveCheck };

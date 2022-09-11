@@ -24,47 +24,49 @@ function createForm() {
     }
 }
 
-function appendTask(project) {
+function removeAllChildren(elementToRemoveFrom) {
+    let child = elementToRemoveFrom.lastElementChild;
+    while (child) {
+        elementToRemoveFrom.removeChild(child);
+        child = elementToRemoveFrom.lastElementChild;
+    }
+}
 
+function sortSmallToBig() {
     project.sort(compareTasks);
 
-    let child = tasks.lastElementChild;
-    while (child) {
-        tasks.removeChild(child);
-        child = tasks.lastElementChild;
-    }
+}
 
-    project.forEach(function (value, i) {
+function appendTask(project) {
 
         let card = document.createElement('div');
         card.className = 'card';
-        card.id = 'card' + i;
-        let cardId = card.id;
-        console.log(value.taskPriority);
-        if(value.taskPriority === '1') {
+        card.id = 'card' + indexOf(project);
+
+        if(project.taskPriority === '1') {
             card.style.border = '2px solid red';
         }
-        else if (value.taskPriority === '2') {
+        else if (project.taskPriority === '2') {
             card.style.border = '2px solid yellow';
         }
 
         let title = document.createElement('div');
-        title.innerHTML = `Title: ${value.taskTitle}`;
+        title.textContent = `Title: ${project.taskTitle}`;
         title.className = 'cardTitle';
         card.appendChild(title);
 
         let description = document.createElement('div');
-        description.innerHTML = `Description: ${value.taskDescription}`;
+        description.textContent = `Description: ${project.taskDescription}`;
         description.className = 'cardDescription';
         card.appendChild(description);
 
         let priority = document.createElement('div');
-        priority.innerHTML = `Priority: ${value.taskPriority}`;
+        priority.textContent = `Priority: ${project.taskPriority}`;
         priority.className = 'cardPriority';
         card.appendChild(priority);
 
         let dateTime = document.createElement('div');
-        dateTime.innerHTML = `Time and Date: ${value.taskTimeDate}`;
+        dateTime.textContent = `Time and Date: ${project.taskTimeDate}`;
         dateTime.className = 'cardDateTime';
         card.appendChild(dateTime);
 
@@ -73,17 +75,14 @@ function appendTask(project) {
         let btn = document.createElement('button');
         btn.className = 'rmTaskBtn';
         btn.textContent = 'Remove Task';
-        btn.id = 'rmbtn' + i;
+        btn.id = 'rmbtn' + indexOf(project);
         card.appendChild(btn);
 
         btn.addEventListener('click', () => {
-            
+
             project.splice(i, 1);
             tasks.removeChild(card);
-            updateProjects();
         });
-
-    });
 }
 
 
