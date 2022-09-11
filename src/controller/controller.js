@@ -39,7 +39,9 @@ modelProject.forEach(function(i) {
 }
 
 
-
+function controllerInit(){
+    
+};
 
 
 
