@@ -1,5 +1,5 @@
 import {modelNewProject, modelNewTask, modelEditProject} from '../model/model';
-import {appendProjects,  appendTask } from '../view/htmlGenerator';
+import {appendProjects,  uiAppendTask } from '../view/htmlGenerator';
 
 
 document.querySelector('.addTask').addEventListener('click', () => {
@@ -27,7 +27,16 @@ appendProjects(editedProject);
 
 function controllerCreateTask(modelTaskTitle, modelTaskDescription, modelTaskPriority, modelTaskTimeDate, modelProject) {
 newTask = modelNewTask(modelTaskTitle, modelTaskDescription, modelTaskPriority, modelTaskTimeDate, modelProject);
-appendTask(modelProject);
+
+modelProject.forEach(function(i) {
+    uiAppendTask(modelProject[i]);
+    btn = document.querySelector('#rmTaskbtn' + i)
+    btn.addEventListener('click', () => {
+
+        project.splice(i, 1);
+        tasks.removeChild(card);
+    });
+});
 }
 
 

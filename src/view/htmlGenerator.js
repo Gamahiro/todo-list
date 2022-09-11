@@ -37,36 +37,36 @@ function sortSmallToBig() {
 
 }
 
-function appendTask(project) {
+function uiAppendTask(modelTask) {
 
         let card = document.createElement('div');
         card.className = 'card';
-        card.id = 'card' + indexOf(project);
+        card.id = 'card' + indexOf(modelTask);
 
-        if(project.taskPriority === '1') {
+        if(modelTask.taskPriority === '1') {
             card.style.border = '2px solid red';
         }
-        else if (project.taskPriority === '2') {
+        else if (modelTask.taskPriority === '2') {
             card.style.border = '2px solid yellow';
         }
 
         let title = document.createElement('div');
-        title.textContent = `Title: ${project.taskTitle}`;
+        title.textContent = `Title: ${modelTask.taskTitle}`;
         title.className = 'cardTitle';
         card.appendChild(title);
 
         let description = document.createElement('div');
-        description.textContent = `Description: ${project.taskDescription}`;
+        description.textContent = `Description: ${modelTask.taskDescription}`;
         description.className = 'cardDescription';
         card.appendChild(description);
 
         let priority = document.createElement('div');
-        priority.textContent = `Priority: ${project.taskPriority}`;
+        priority.textContent = `Priority: ${modelTask.taskPriority}`;
         priority.className = 'cardPriority';
         card.appendChild(priority);
 
         let dateTime = document.createElement('div');
-        dateTime.textContent = `Time and Date: ${project.taskTimeDate}`;
+        dateTime.textContent = `Time and Date: ${modelTask.taskTimeDate}`;
         dateTime.className = 'cardDateTime';
         card.appendChild(dateTime);
 
@@ -75,14 +75,10 @@ function appendTask(project) {
         let btn = document.createElement('button');
         btn.className = 'rmTaskBtn';
         btn.textContent = 'Remove Task';
-        btn.id = 'rmbtn' + indexOf(project);
+        btn.id = 'rmTaskbtn' + indexOf(modelTask);
         card.appendChild(btn);
 
-        btn.addEventListener('click', () => {
-
-            project.splice(i, 1);
-            tasks.removeChild(card);
-        });
+        
 }
 
 
@@ -106,7 +102,7 @@ function appendProjects(project) {
 
 
         projectListElement.addEventListener('click', () => {
-            appendTask(project[i].project);
+            uiAppendTask(project[i].project);
 
             let projectContainer = document.createElement('div');
             let projectDisplayedName = document.createElement('div');
@@ -215,4 +211,4 @@ const projectForm = `<form id ="projectForm">
 
 
 
-export { createForm, appendTask, appendProjects};
+export { createForm, uiAppendTask, appendProjects};
