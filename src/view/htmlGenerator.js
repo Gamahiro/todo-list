@@ -164,7 +164,92 @@ function addProjectFormOptions() {
     projects.forEach((element, i) => {
         formOptions += `<option value="${i}">${element.name}</option>`;
     })
+}
 
+function newForm () {
+let taskForm = document.createElement('form');
+taskForm.id = 'taskForm';
+
+let labelTitle = document.createElement('label');
+labelTitle.for = 'title';
+labelTitle.textContent = 'Title:';
+
+let inputTitle = document.createElement('input');
+inputTitle.type = 'text';
+inputTitle.id = 'title';
+inputTitle.name = 'title';
+inputTitle.required = true;
+
+let labelDescription = document.createElement('label');
+labelDescription.for = 'description';
+labelDescription.textContent = 'Description:';
+
+let inputDescription = document.createElement('input');
+inputDescription.type = 'text';
+inputDescription.id = 'description';
+inputDescription.name = 'description';
+
+let labelPriority = document.createElement('label');
+labelPriority.for = 'priority';
+labelPriority.textContent = 'Priority';
+
+let selectPriority = document.createElement('select');
+selectPriority.id = 'priority';
+selectPriority.name = 'priority';
+selectPriority.value = '1';
+
+let priorityOption1 = document.createElement('option');
+priorityOption1.value = '1';
+priorityOption1.textContent = '1';
+
+let priorityOption2 = document.createElement('option');
+priorityOption2.value = '2';
+priorityOption2.textContent = '2';
+
+let priorityOption3 = document.createElement('option');
+priorityOption3.value = '3';
+priorityOption3.textContent = '3';
+
+selectPriority.appendChild(priorityOption1);
+selectPriority.appendChild(priorityOption2);
+selectPriority.appendChild(priorityOption3);
+
+let labeldateTime = document.createElement('label');
+labeldateTime.for = 'dateTime';
+labeldateTime.textContent = 'Time and Date:';
+
+let inputDateTime = document.createElement('input');
+inputDateTime.type = 'datetime-local';
+inputDateTime.id = 'dateTime';
+inputDateTime.name = 'dateTime';
+inputDateTime.value = '';
+
+let labelProject = document.createElement('label');
+labelProject.for = 'project';
+
+
+let submitBtn = document.createElement('input');
+submitBtn.type = 'submit';
+submitBtn.value = 'Submit';
+submitBtn.id = 'submitForm';
+
+taskForm.appendChild(labelDescription);
+taskForm.appendChild(inputDescription);
+taskForm.appendChild(labelPriority);
+taskForm.appendChild(selectPriority);
+taskForm.appendChild(labeldateTime);
+taskForm.appendChild(inputDateTime);
+taskForm.appendChild(labelProject);
+taskForm.appendChild(submitBtn);
+
+
+
+
+
+}
+
+
+    /* 
     let taskForm = `<form id ="taskForm">
 <label for="title">Title:</label>
 <input type="text" id="title" name="title" required>
@@ -195,7 +280,7 @@ function addProjectFormOptions() {
 
     return taskForm;
 }
-
+ */
 
 
 
@@ -211,4 +296,4 @@ const projectForm = `<form id ="projectForm">
 
 
 
-export { createForm, uiAppendTask, appendProjects};
+export { createForm, uiAppendTask, appendProjects, removeAllChildren};

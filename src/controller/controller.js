@@ -1,12 +1,9 @@
 import {modelNewProject, modelNewTask, modelEditProject} from '../model/model';
-import {appendProjects,  uiAppendTask } from '../view/htmlGenerator';
+import {appendProjects,  removeAllChildren,  uiAppendTask } from '../view/htmlGenerator';
 
 
 document.querySelector('.addTask').addEventListener('click', () => {
-
     createForm();
-    saveProjects(projects);
-
 });
 
 
@@ -27,6 +24,8 @@ appendProjects(editedProject);
 
 function controllerCreateTask(modelTaskTitle, modelTaskDescription, modelTaskPriority, modelTaskTimeDate, modelProject) {
 newTask = modelNewTask(modelTaskTitle, modelTaskDescription, modelTaskPriority, modelTaskTimeDate, modelProject);
+
+removeAllChildren(document.querySelector('.tasks'));
 
 modelProject.forEach(function(i) {
     uiAppendTask(modelProject[i]);
