@@ -82,54 +82,27 @@ function uiAppendProjects(project) {
         projectList.appendChild(projectListElement);
 
 
-        projectListElement.addEventListener('click', () => {
-            uiAppendTask(project[i].project);
 
-            let projectContainer = document.createElement('div');
-            let projectDisplayedName = document.createElement('div');
-            let projectDisplayedDescr = document.createElement('p');
-
-            projectContainer.className = 'projectContainer';
-            divForm.innerHTML = '';
-
-
-            projectDisplayedName.textContent = project[i].name;
-            projectDisplayedDescr.textContent = project[i].description;
-
-            projectContainer.appendChild(projectDisplayedName);
-            projectContainer.appendChild(projectDisplayedDescr);
-            divForm.appendChild(projectContainer);
-
-        });
     }
 }
 
 
 
 
-function toggleHideProjectsEvent() {
-    document.querySelector('#projectsBtn').addEventListener('click', function (e) {
 
-        if (e.target !== this)
-            return;
 
-        let projectsList = document.querySelector('#projects');
 
-        if (projectsList.style.display != 'none') {
-            projectsList.style.display = 'none';
-        }
-        else {
-            projectsList.style.display = 'block';
-        }
-    });
+function uiFormCreateProjectOptions() {
 
+    let projectOption = document.createElement('option');
+    projectOption.value = i;
+    projectOption.name = element.name;
 }
 
 
-
-
-
 function uiCreateTaskForm() {
+
+
     let taskForm = document.createElement('form');
     taskForm.id = 'taskForm';
 
@@ -187,24 +160,16 @@ function uiCreateTaskForm() {
     inputDateTime.name = 'dateTime';
     inputDateTime.value = '';
 
-    let labelProject = document.createElement('label');
-    labelProject.for = 'project';
-
-    projects.forEach((element, i) => {
-
-        let projectOption = document.createElement('option');
-        projectOption.value = i;
-        projectOption.name = element.name;
-
-
-    });
-
+    let labelProject = document.querySelector('.labelProject');
+    
 
     let submitBtn = document.createElement('input');
     submitBtn.type = 'submit';
     submitBtn.value = 'Submit';
     submitBtn.id = 'submitForm';
 
+    taskForm.appendChild(labelTitle);
+    taskForm.appendChild(inputTitle);
     taskForm.appendChild(labelDescription);
     taskForm.appendChild(inputDescription);
     taskForm.appendChild(labelPriority);
@@ -214,19 +179,9 @@ function uiCreateTaskForm() {
     taskForm.appendChild(labelProject);
     taskForm.appendChild(submitBtn);
 
-    content.insertBefore(taskForm, content.firstChild);
+    divForm.insertBefore(taskForm, divForm.firstChild);
 
-    document.querySelector('#taskForm').onsubmit = function (e) {
-        e.preventDefault();
 
-        modelNewTask(
-            document.querySelector('#title').value,
-            document.querySelector('#description').value,
-            document.querySelector('#priority').value,
-            document.querySelector('#dateTime').value,
-            projects[document.querySelector('#project').value].project
-        )
-    }
 }
 
 
@@ -258,31 +213,23 @@ function uiProjectForm() {
     submitBtn.value = 'Submit';
     submitBtn.id = 'submitForm';
 
-    submitBtn.addEventListener('click', () => {
-        divForm.innerHTML = projectForm;
 
-        document.querySelector('#projectForm').onsubmit = function (e) {
-            e.preventDefault();
-
-            modelNewProject(
-                document.querySelector('#title').value,
-                document.querySelector('#description').value,
-            )
-            uiAppendProjects(projects);
-        }
-    });
 
 }
 
+
+
+
+
 function initEvents() {
-    toggleHideProjectsEvent();
-    uiCreateTaskForm();
+
+
 }
 
 function viewInit() {
-
+    initEvents();
 
 }
 
 
-export {uiAppendProjects,  removeAllChildren,  uiAppendTask }
+export { uiAppendProjects, removeAllChildren, uiAppendTask, viewInit, uiFormCreateProjectOptions, uiCreateTaskForm }

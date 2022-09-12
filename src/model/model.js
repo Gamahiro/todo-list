@@ -4,6 +4,10 @@ import { save, load, saveCheck } from "./localStorage";
 //main array, holds projects
 let projectCollection = [];
 
+function getProjectCollection() {
+    return projectCollection;
+}
+
 function saveProjectCollection() {
 save(projectCollection);
 }
@@ -61,4 +65,4 @@ function compareTasks(taskA, taskB) {
     return 0;
 }
 
-export {modelNewProject, modelNewTask, modelEditProject, compareTasks, checkIfSaveExist, save, load};
+export {modelNewProject, modelNewTask, modelEditProject, compareTasks, checkIfSaveExist, save, load, getProjectCollection};

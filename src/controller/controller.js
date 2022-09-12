@@ -1,11 +1,9 @@
-import {modelNewProject, modelNewTask, modelEditProject, checkIfSaveExist, save, load} from '../model/model';
-import {uiAppendProjects,  removeAllChildren,  uiAppendTask } from '../view/htmlGenerator';
-import { saveCheck } from '../model/localStorage';
+import {modelNewProject, modelNewTask, modelEditProject, checkIfSaveExist, save, load, getProjectCollection} from '../model/model';
+import {uiAppendProjects,  removeAllChildren,  uiAppendTask, viewInit, uiFormCreateProjectOptions, uiCreateTaskForm } from '../view/htmlGenerator';
+
+const projectCollection = getProjectCollection();
 
 
-document.querySelector('.addTask').addEventListener('click', () => {
-    createForm();
-});
 
 
 //functions for creating and updating tasks and projects
@@ -26,22 +24,59 @@ uiAppendProjects(editedProject);
 function controllerCreateTask(modelTaskTitle, modelTaskDescription, modelTaskPriority, modelTaskTimeDate, modelProject) {
 newTask = modelNewTask(modelTaskTitle, modelTaskDescription, modelTaskPriority, modelTaskTimeDate, modelProject);
 
-removeAllChildren(document.querySelector('.tasks'));
 
 modelProject.forEach(function(i) {
     uiAppendTask(modelProject[i]);
     btn = document.querySelector('#rmTaskbtn' + i)
     btn.addEventListener('click', () => {
 
-        project.splice(i, 1);
+        modelProject.splice(i, 1);
         tasks.removeChild(card);
     });
 });
 }
 
+function uiTaskFormSubmitEvent() {
+    document.querySelector('#taskForm').onsubmit = function (e) {
+        e.preventDefault();
+
+        controllerCreateTask(
+            document.querySelector('#title').value,
+            document.querySelector('#description').value,
+            document.querySelector('#priority').value,
+            document.querySelector('#dateTime').value,
+            projectCollection[document.querySelector('#project').value].project
+        )
+    }
+}
+
+function controllerGenerateFormProjectOptions() {
+    let labelProject = document.createElement('select');
+    labelProject.for = 'project';
+    labelProject.className = 'labelProject';
+
+    projectCollection.forEach((element,i) => {
+        let projectOption = document.createElement('option');
+        projectOption.value = i;
+        projectOption.name = element.name;
+        labelProject.appendChild(projectOption);
+    })
+
+
+}
+
+function uiCreateTaskFormEvent() {
+    document.querySelector('.addTask').addEventListener('click', () => {
+        removeAllChildren(document.querySelector('.divForm'));
+        controllerGenerateFormProjectOptions();
+        uiCreateTaskForm();
+    });
+}
 
 function controllerInit(){
     checkIfSaveExist();
+    viewInit();
+    uiCreateTaskFormEvent();
 };
 
 
