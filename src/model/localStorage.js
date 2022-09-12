@@ -1,3 +1,5 @@
+import { modelNewProject } from "./model";
+
 function storageAvailable(type) {
     let storage;
     try {
@@ -24,23 +26,23 @@ function storageAvailable(type) {
 }
 
 
-function saveProjects(project) {
+function saveProjects(projectCollection) {
 
-    localStorage.setItem('projects', JSON.stringify(project));
+    localStorage.setItem('projectCollection', JSON.stringify(projectCollection));
 }
 
 
 function loadProjects() {
-    const currentProject = JSON.parse(localStorage.getItem('projects'));
+    const currentProject = JSON.parse(localStorage.getItem('projectCollection'));
     return currentProject;
 }
 
-function saveCheck(){
-if (!localStorage.getItem('projects')) {
+function saveCheck(projectCollection){
+if (!localStorage.getItem('projectCollection')) {
     modelNewProject('Default Project', 'The default project');
-    saveProjects(projects);
+    saveProjects(projectCollection);
   } else {
-    projects = loadProjects();
+    projectCollection = loadProjects();
   }}
 
 

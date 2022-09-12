@@ -1,7 +1,7 @@
-
-
+import { projectFactory } from "./factory/projectFactory";
+import { taskFactory } from "./factory/taskFactory";
 //main array, holds projects
-let projects = [];
+let projectCollection = [];
 
 
 
@@ -9,7 +9,7 @@ let projects = [];
 function modelNewProject(projectName, projectDescription) {
 
     let newProject = projectFactory(projectName, projectDescription);
-    projects.push(newProject);
+    projectCollection.push(newProject);
     return newProject;
 }
 
@@ -29,15 +29,17 @@ function modelNewTask(taskTitle, taskDescription, taskPriority, taskTimeDate, pr
 
     let newTask = taskFactory(taskTitle, taskDescription, taskPriority, taskTimeDate);
     if (project == undefined) {
-        project = projects[0].project;
+        project = projectCollection[0].project;
     }
     project.push(newTask);
 }
 
-function modelEditTask(task) {
+function modelEditTask(modelTaskObject, newTaskTitle, newTaskDescription, newTaskPriority, newTaskTimeDate, newAssignedProject) {
 
 
 }
+
+
 
 
 function compareTasks(taskA, taskB) {

@@ -1,5 +1,5 @@
 import './view/style.css';
-import { saveCheck } from './localStorage';
+import { saveCheck } from './model/localStorage';
 
 
 function init() {
