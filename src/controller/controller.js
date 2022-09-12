@@ -1,5 +1,6 @@
-import {modelNewProject, modelNewTask, modelEditProject} from '../model/model';
-import {appendProjects,  removeAllChildren,  uiAppendTask } from '../view/htmlGenerator';
+import {modelNewProject, modelNewTask, modelEditProject, checkIfSaveExist, save, load} from '../model/model';
+import {uiAppendProjects,  removeAllChildren,  uiAppendTask } from '../view/htmlGenerator';
+import { saveCheck } from '../model/localStorage';
 
 
 document.querySelector('.addTask').addEventListener('click', () => {
@@ -11,13 +12,13 @@ document.querySelector('.addTask').addEventListener('click', () => {
 
 function controllerCreateProject(modelProjectName, modelProjectDescription) {
 newProject = modelNewProject(modelProjectName, modelProjectDescription);
-appendProjects(newProject);
+uiAppendProjects(newProject);
 }
 
 
 function controllerEditProject(project, newName, newDescription) {
 editedProject = modelEditProject(project, newName, newDescription);
-appendProjects(editedProject);
+uiAppendProjects(editedProject);
 
 }
 
@@ -40,21 +41,12 @@ modelProject.forEach(function(i) {
 
 
 function controllerInit(){
-    
+    checkIfSaveExist();
 };
-
-
-
-
-
-
-
-
-
-
-
 
 
 function init() {
 
 }
+
+export {controllerInit}

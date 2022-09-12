@@ -1,4 +1,5 @@
-import { createTask, createProject, projects, updateProjects, compareTasks } from "..";
+import { modelNewTask, modelNewProject, modelEditProject, compareTasks } from "../model/model";
+
 const content = document.querySelector('.content');
 const tasks = document.querySelector('.tasks');
 const divForm = document.querySelector('.divForm');
@@ -12,7 +13,7 @@ function removeAllChildren(elementToRemoveFrom) {
     }
 }
 
-function sortSmallToBig() {
+function sortSmallToBig(project) {
     project.sort(compareTasks);
 
 }
@@ -106,25 +107,26 @@ function uiAppendProjects(project) {
 
 
 
-function toggleHideProjects() {
-    let projectsList = document.querySelector('#projects');
+function toggleHideProjectsEvent() {
+    document.querySelector('#projectsBtn').addEventListener('click', function (e) {
 
-    if (projectsList.style.display != 'none') {
-        projectsList.style.display = 'none';
-    }
-    else {
-        projectsList.style.display = 'block';
-    }
+        if (e.target !== this)
+            return;
+
+        let projectsList = document.querySelector('#projects');
+
+        if (projectsList.style.display != 'none') {
+            projectsList.style.display = 'none';
+        }
+        else {
+            projectsList.style.display = 'block';
+        }
+    });
 
 }
-document.querySelector('#projectsBtn').addEventListener('click', function (e) {
 
-    if (e.target !== this)
-        return;
 
-    toggleHideProjects();
 
-});
 
 
 function uiCreateTaskForm() {
@@ -217,7 +219,7 @@ function uiCreateTaskForm() {
     document.querySelector('#taskForm').onsubmit = function (e) {
         e.preventDefault();
 
-        createTask(
+        modelNewTask(
             document.querySelector('#title').value,
             document.querySelector('#description').value,
             document.querySelector('#priority').value,
@@ -258,11 +260,11 @@ function uiProjectForm() {
 
     submitBtn.addEventListener('click', () => {
         divForm.innerHTML = projectForm;
-    
+
         document.querySelector('#projectForm').onsubmit = function (e) {
             e.preventDefault();
-    
-            createProject(
+
+            modelNewProject(
                 document.querySelector('#title').value,
                 document.querySelector('#description').value,
             )
@@ -272,7 +274,15 @@ function uiProjectForm() {
 
 }
 
+function initEvents() {
+    toggleHideProjectsEvent();
+    uiCreateTaskForm();
+}
+
+function viewInit() {
 
 
+}
 
-export { createForm, uiAppendTask, uiAppendProjects as appendProjects, removeAllChildren };
+
+export {uiAppendProjects,  removeAllChildren,  uiAppendTask }

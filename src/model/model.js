@@ -1,9 +1,18 @@
 import { projectFactory } from "./factory/projectFactory";
 import { taskFactory } from "./factory/taskFactory";
+import { save, load, saveCheck } from "./localStorage";
 //main array, holds projects
 let projectCollection = [];
 
-
+function saveProjectCollection() {
+save(projectCollection);
+}
+function loadProjectCollection() {
+    projectCollection = load();
+}
+function checkIfSaveExist() {
+    saveCheck(projectCollection);
+}
 
 
 function modelNewProject(projectName, projectDescription) {
@@ -52,4 +61,4 @@ function compareTasks(taskA, taskB) {
     return 0;
 }
 
-export {modelNewProject, modelNewTask, modelEditProject};
+export {modelNewProject, modelNewTask, modelEditProject, compareTasks, checkIfSaveExist, save, load};

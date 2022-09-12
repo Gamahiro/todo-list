@@ -26,13 +26,13 @@ function storageAvailable(type) {
 }
 
 
-function saveProjects(projectCollection) {
+function save(projectCollection) {
 
     localStorage.setItem('projectCollection', JSON.stringify(projectCollection));
 }
 
 
-function loadProjects() {
+function load() {
     const currentProject = JSON.parse(localStorage.getItem('projectCollection'));
     return currentProject;
 }
@@ -40,10 +40,10 @@ function loadProjects() {
 function saveCheck(projectCollection){
 if (!localStorage.getItem('projectCollection')) {
     modelNewProject('Default Project', 'The default project');
-    saveProjects(projectCollection);
+    save(projectCollection);
   } else {
-    projectCollection = loadProjects();
-  }}
+    projectCollection = load();
+  }};
 
 
-export { storageAvailable, loadProjects, saveProjects, saveCheck };
+export { storageAvailable, load, save, saveCheck };
