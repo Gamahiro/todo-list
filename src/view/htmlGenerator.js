@@ -160,7 +160,7 @@ function uiCreateTaskForm() {
     inputDateTime.name = 'dateTime';
     inputDateTime.value = '';
 
-    let labelProject = document.querySelector('.labelProject');
+
     
 
     let submitBtn = document.createElement('input');
@@ -176,7 +176,6 @@ function uiCreateTaskForm() {
     taskForm.appendChild(selectPriority);
     taskForm.appendChild(labeldateTime);
     taskForm.appendChild(inputDateTime);
-    taskForm.appendChild(labelProject);
     taskForm.appendChild(submitBtn);
 
     divForm.insertBefore(taskForm, divForm.firstChild);

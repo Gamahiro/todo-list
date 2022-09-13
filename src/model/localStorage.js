@@ -1,4 +1,3 @@
-import { modelNewProject } from "./model";
 
 function storageAvailable(type) {
     let storage;
@@ -37,13 +36,7 @@ function load() {
     return currentProject;
 }
 
-function saveCheck(projectCollection){
-if (!localStorage.getItem('projectCollection')) {
-    modelNewProject('Default Project', 'The default project');
-    save(projectCollection);
-  } else {
-    projectCollection = load();
-  }};
 
 
-export { storageAvailable, load, save, saveCheck };
+
+export { storageAvailable, load, save };

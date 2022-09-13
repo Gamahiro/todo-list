@@ -21,7 +21,6 @@ function submitBtnClickEvenet() {
     const divForm = document.querySelector('.divForm');
 
     submitBtn.addEventListener('click', () => {
-        divForm.innerHTML = projectForm;
     
         document.querySelector('#projectForm').onsubmit = function (e) {
             e.preventDefault();

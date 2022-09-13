@@ -14,10 +14,6 @@ save(projectCollection);
 function loadProjectCollection() {
     projectCollection = load();
 }
-function checkIfSaveExist() {
-    saveCheck(projectCollection);
-}
-
 
 function modelNewProject(projectName, projectDescription) {
 
@@ -65,4 +61,4 @@ function compareTasks(taskA, taskB) {
     return 0;
 }
 
-export {modelNewProject, modelNewTask, modelEditProject, compareTasks, checkIfSaveExist, save, load, getProjectCollection};
+export {modelNewProject, modelNewTask, modelEditProject, compareTasks, saveProjectCollection, loadProjectCollection, getProjectCollection};

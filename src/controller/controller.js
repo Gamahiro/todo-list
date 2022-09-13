@@ -1,5 +1,6 @@
-import {modelNewProject, modelNewTask, modelEditProject, checkIfSaveExist, save, load, getProjectCollection} from '../model/model';
-import {uiAppendProjects,  removeAllChildren,  uiAppendTask, viewInit, uiFormCreateProjectOptions, uiCreateTaskForm } from '../view/htmlGenerator';
+import {modelNewProject, modelNewTask, modelEditProject, getProjectCollection} from '../model/model';
+import {uiAppendProjects,  removeAllChildren,  uiAppendTask, viewInit, uiCreateTaskForm } from '../view/htmlGenerator';
+import { saveCheck } from './saveController';
 
 const projectCollection = getProjectCollection();
 
@@ -51,30 +52,35 @@ function uiTaskFormSubmitEvent() {
 }
 
 function controllerGenerateFormProjectOptions() {
-    let labelProject = document.createElement('select');
+    
+    let labelProject = document.createElement('label');
     labelProject.for = 'project';
-    labelProject.className = 'labelProject';
+    labelProject.textContent = 'Project:';
 
+
+    let selectProject = document.createElement('select');
+    selectProject.className = 'labelProject';
+    console.log(projectCollection);
     projectCollection.forEach((element,i) => {
         let projectOption = document.createElement('option');
         projectOption.value = i;
-        projectOption.name = element.name;
-        labelProject.appendChild(projectOption);
+        projectOption.textContent = element.name;
+        selectProject.appendChild(projectOption);
     })
-
-
+    document.querySelector('#taskForm').insertBefore(labelProject, document.querySelector('#submitForm'));
+    document.querySelector('#taskForm').insertBefore(selectProject, document.querySelector('#submitForm'));
 }
 
 function uiCreateTaskFormEvent() {
     document.querySelector('.addTask').addEventListener('click', () => {
         removeAllChildren(document.querySelector('.divForm'));
-        controllerGenerateFormProjectOptions();
         uiCreateTaskForm();
+        controllerGenerateFormProjectOptions();
     });
 }
 
 function controllerInit(){
-    checkIfSaveExist();
+    saveCheck();
     viewInit();
     uiCreateTaskFormEvent();
 };
