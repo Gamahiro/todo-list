@@ -16,7 +16,7 @@ function toggleHideProjectsEvent() {
 
 }
 
-function submitBtnClickEvenet() {
+function submitBtnClickEvent() {
     const submitBtn = document.querySelector('#submitForm');
     const divForm = document.querySelector('.divForm');
 
@@ -36,7 +36,14 @@ function submitBtnClickEvenet() {
 }
 
 
-projectListElement.addEventListener('click', () => {
+
+
+function showProjectsBtnEvent () {
+    
+    projectListElement.addEventListener('click', () => {
+    
+
+    });
     uiAppendTask(project[i].project);
 
     let projectContainer = document.createElement('div');
@@ -53,9 +60,7 @@ projectListElement.addEventListener('click', () => {
     projectContainer.appendChild(projectDisplayedName);
     projectContainer.appendChild(projectDisplayedDescr);
     divForm.appendChild(projectContainer);
-
-});
-
+}
 
 
 
@@ -68,3 +73,5 @@ function initEvents() {
     toggleHideProjectsEvent();
 
 }
+
+export {initEvents}

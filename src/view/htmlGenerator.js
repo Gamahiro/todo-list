@@ -1,4 +1,4 @@
-import { modelNewTask, modelNewProject, modelEditProject, compareTasks } from "../model/model";
+import { compareTasks } from "../model/model";
 
 const content = document.querySelector('.content');
 const tasks = document.querySelector('.tasks');
@@ -18,11 +18,11 @@ function sortSmallToBig(project) {
 
 }
 
-function uiAppendTask(modelTask) {
+function uiAppendTask(modelTask, index) {
 
     let card = document.createElement('div');
     card.className = 'card';
-    card.id = 'card' + indexOf(modelTask);
+    card.id = 'card' + index;
 
     if (modelTask.taskPriority === '1') {
         card.style.border = '2px solid red';
@@ -56,7 +56,7 @@ function uiAppendTask(modelTask) {
     let btn = document.createElement('button');
     btn.className = 'rmTaskBtn';
     btn.textContent = 'Remove Task';
-    btn.id = 'rmTaskbtn' + indexOf(modelTask);
+    btn.id = 'rmTaskbtn' + index;
     card.appendChild(btn);
 
 
@@ -216,19 +216,4 @@ function uiProjectForm() {
 
 }
 
-
-
-
-
-function initEvents() {
-
-
-}
-
-function viewInit() {
-    initEvents();
-
-}
-
-
-export { uiAppendProjects, removeAllChildren, uiAppendTask, viewInit, uiFormCreateProjectOptions, uiCreateTaskForm }
+export { uiAppendProjects, removeAllChildren, uiAppendTask, uiFormCreateProjectOptions, uiCreateTaskForm }
