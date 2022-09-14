@@ -19,6 +19,7 @@ function modelNewProject(projectName, projectDescription) {
 
     let newProject = projectFactory(projectName, projectDescription);
     projectCollection.push(newProject);
+    saveProjectCollection();
     return newProject;
 }
 
@@ -31,6 +32,7 @@ function modelEditProject(project, newName, newDescription) {
     }
     project.name = newName;
     project.description = newDescription;
+    saveProjectCollection();
     return project;
 }
 
@@ -41,6 +43,7 @@ function modelNewTask(taskTitle, taskDescription, taskPriority, taskTimeDate, pr
         project = projectCollection[0].project;
     }
     project.push(newTask);
+    saveProjectCollection();
 }
 
 function modelEditTask(modelTaskObject, newTaskTitle, newTaskDescription, newTaskPriority, newTaskTimeDate, newAssignedProject) {

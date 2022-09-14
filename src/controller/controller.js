@@ -1,24 +1,15 @@
-import {modelNewProject, modelNewTask, modelEditProject, getProjectCollection} from '../model/model';
-import {uiAppendProjects,  removeAllChildren,  uiAppendTask, uiCreateTaskForm } from '../view/htmlGenerator';
+import { modelNewProject, modelNewTask, modelEditProject, getProjectCollection } from '../model/model';
+import { uiAppendProjects, removeAllChildren, uiAppendTask, uiCreateTaskForm, uiProjectForm } from '../view/htmlGenerator';
 import { saveCheck } from './saveController';
 
-/* 
-functions for creating and updating tasks and projects
- */
-
-
-function controllerCreateProject(modelProjectName, modelProjectDescription) {
-newProject = modelNewProject(modelProjectName, modelProjectDescription);
-uiAppendProjects(newProject);
-}
 
 
 
-function controllerEditProject(project, newName, newDescription) {
-editedProject = modelEditProject(project, newName, newDescription);
-uiAppendProjects(editedProject);
 
-}
+
+
+
+//**task functions**
 
 //creates modelTask and updates uiTasks
 function controllerCreateTask(modelTaskTitle, modelTaskDescription, modelTaskPriority, modelTaskTimeDate, modelProject) {
@@ -29,14 +20,13 @@ function controllerCreateTask(modelTaskTitle, modelTaskDescription, modelTaskPri
 
 }
 
-//removes and rebuilds all tasks to DOM
 function uiUpdateTasks(modelProject) {
     removeAllChildren(document.querySelector('.tasks'));
-    modelProject.forEach(function(element, i) {
+    modelProject.forEach(function (element, i) {
         uiAppendTask(element, i);
         let btn = document.querySelector('#rmTaskbtn' + i);
         btn.addEventListener('click', () => {
-    
+
             modelProject.splice(i, 1);
             document.querySelector('.tasks').removeChild(document.querySelector('#card' + i));
         });
@@ -58,9 +48,9 @@ function uiTaskFormSubmitEvent() {
     }
 }
 
-//creates form options for projects from the projectCollection
+//creates form options for projects from the projectCollection. for creating tasks
 function controllerGenerateFormProjectOptions() {
-    
+
     let labelProject = document.createElement('label');
     labelProject.for = 'project';
     labelProject.textContent = 'Project:';
@@ -68,7 +58,7 @@ function controllerGenerateFormProjectOptions() {
 
     let selectProject = document.createElement('select');
     selectProject.className = 'selectProject';
-    getProjectCollection().forEach((element,i) => {
+    getProjectCollection().forEach((element, i) => {
         let projectOption = document.createElement('option');
         projectOption.value = i;
         projectOption.textContent = element.name;
@@ -89,11 +79,60 @@ function uiCreateTaskFormEvent() {
     });
 }
 
-function controllerInit(){
+
+
+//*** Project functions ***
+
+function controllerCreateProject(modelProjectName, modelProjectDescription) {
+    modelNewProject(modelProjectName, modelProjectDescription);
+    uiAppendProjects(getProjectCollection());
+}
+
+
+
+function controllerEditProject(project, newName, newDescription) {
+    editedProject = modelEditProject(project, newName, newDescription);
+
+}
+
+function uiProjectFormSubmitEvent() {
+    const submitBtn = document.querySelector('#submitForm');
+
+    submitBtn.addEventListener('click', () => {
+
+        document.querySelector('#projectForm').onsubmit = function (e) {
+            e.preventDefault();
+
+            controllerCreateProject(
+                document.querySelector('#title').value,
+                document.querySelector('#description').value,
+            )
+        }
+    });
+
+}
+
+function uiCreateProjectFormEvent() {
+    document.querySelector('#newProjectBtn').addEventListener('click', () => {
+        removeAllChildren(document.querySelector('.divForm'));
+        uiProjectForm();
+        uiProjectFormSubmitEvent();
+    })
+}
+
+
+
+function showProjectsBtnInit() {
+    uiAppendProjects(getProjectCollection())
+    }
+
+function controllerInit() {
 
     saveCheck();
     uiCreateTaskFormEvent();
+    uiCreateProjectFormEvent();
+    showProjectsBtnInit();
 };
 
 
-export {controllerInit}
+export { controllerInit, uiUpdateTasks }

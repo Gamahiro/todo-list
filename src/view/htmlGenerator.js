@@ -1,4 +1,5 @@
 import { compareTasks } from "../model/model";
+import { uiUpdateTasks } from "../controller/";
 
 const content = document.querySelector('.content');
 const tasks = document.querySelector('.tasks');
@@ -63,7 +64,7 @@ function uiAppendTask(modelTask, index) {
 }
 
 
-function uiAppendProjects(project) {
+function uiAppendProjects(projectCollection) {
 
     const projectList = document.querySelector('#projects');
 
@@ -73,19 +74,39 @@ function uiAppendProjects(project) {
         child = projectList.lastElementChild;
     }
 
-    for (let i = project.length - 1; i >= 0; i--) {
-
+    for (let i = projectCollection.length - 1; i >= 0; i--) {
 
         let projectListElement = document.createElement('li');
-        projectListElement.textContent = `${project[i].name}`;
+        projectListElement.textContent = `${projectCollection[i].name}`;
         projectListElement.className = 'projectListElement';
+
+        
+        projectListElement.addEventListener('click', () => {
+            projectCollection[i].forEach((element, i) => {
+                uiAppendTask(element, i);
+            })
+        });
+
         projectList.appendChild(projectListElement);
-
-
-
     }
 }
 
+/* uiAppendTask(project[i].project);
+
+    let projectContainer = document.createElement('div');
+    let projectDisplayedName = document.createElement('div');
+    let projectDisplayedDescr = document.createElement('p');
+
+    projectContainer.className = 'projectContainer';
+    divForm.innerHTML = '';
+
+
+    projectDisplayedName.textContent = project[i].name;
+    projectDisplayedDescr.textContent = project[i].description;
+
+    projectContainer.appendChild(projectDisplayedName);
+    projectContainer.appendChild(projectDisplayedDescr);
+    divForm.appendChild(projectContainer); */
 
 
 
@@ -212,8 +233,13 @@ function uiProjectForm() {
     submitBtn.value = 'Submit';
     submitBtn.id = 'submitForm';
 
-
-
+    projectForm.appendChild(labelTitle);
+    projectForm.appendChild(inputTitle);
+    projectForm.appendChild(labelDescription);
+    projectForm.appendChild(inputDescription);
+    projectForm.appendChild(submitBtn);   
+    document.querySelector('.divForm').appendChild(projectForm);
+    
 }
 
-export { uiAppendProjects, removeAllChildren, uiAppendTask, uiFormCreateProjectOptions, uiCreateTaskForm }
+export { uiAppendProjects, removeAllChildren, uiAppendTask, uiFormCreateProjectOptions, uiCreateTaskForm, uiProjectForm }
