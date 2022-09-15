@@ -1,4 +1,4 @@
-import { modelNewProject, modelNewTask, modelEditProject, getProjectCollection, compareTasks } from '../model/model';
+import { modelNewProject, modelNewTask, modelEditProject, getProjectCollection, compareTasks, saveProjectCollection } from '../model/model';
 import { uiAppendProjects, removeAllChildren, uiAppendTask, uiCreateTaskForm, uiProjectForm } from '../view/htmlGenerator';
 import { uiVisibleDetailsToggle } from './uiController';
 import { saveCheck } from './saveController';
@@ -29,7 +29,9 @@ function uiUpdateTasks(modelProject) {
         uiAppendTask(element, i);
 
         let card = document.querySelector('#card' + i);
-        card.addEventListener('click', () => {
+        card.addEventListener('click', function(e) {
+            if (e.target !== this)
+            return;
             uiVisibleDetailsToggle(i);
         });
 
@@ -40,6 +42,7 @@ function uiUpdateTasks(modelProject) {
         btn.addEventListener('click', () => {
             modelProject.splice(i, 1);
             document.querySelector('.tasks').removeChild(document.querySelector('#card' + i));
+            saveProjectCollection();
         });
     });
 }
