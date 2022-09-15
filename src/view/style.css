@@ -7,7 +7,7 @@
 }
 
 body {
-  background-color: darkgray;
+  background-color: #0d9488;
 }
 
 .site {
@@ -32,7 +32,7 @@ width: 400px;
 }
 
 .navbarList li {
-  background-color: aliceblue;
+  background-color: #ccfbf1;
   padding: 5px 15px 5px 15px;
   border: 2px solid black;
   border-radius: 5px;
@@ -60,7 +60,7 @@ margin-left: 8px;
 }
 
 .sidebarList li {
-  background-color: aliceblue;
+  background-color: #ccfbf1;
   padding: 5px 15px 5px 15px;
   border: 2px solid black;
   border-radius: 5px;
@@ -78,7 +78,7 @@ margin-left: 8px;
 
 #projects li{
   list-style: none;
-  background-color: rgb(195, 204, 211);
+  background-color: #f0fdfa;
   padding: 5px 15px 5px 15px;
   border: 2px solid black;
   border-radius: 5px;
@@ -86,7 +86,7 @@ margin-left: 8px;
 
 .content {
   font-family: 'Roboto';
-  background-color: gray;
+  background-color: #0f766e;
   border: 2px solid black;
 
   grid-column-start: 2;
@@ -112,7 +112,8 @@ margin-left: 8px;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 150px;
+  height: 200px;
+
 }
 
 #submitForm:hover {
@@ -133,8 +134,16 @@ form {
   width: 620px;
   justify-content: space-between;
   border: 2px solid black;
-  background-color: darkgray;
+  background-color: #14b8a6;
 
+}
+
+.projectContainer {
+  border: 2px solid black;
+  background-color: #14b8a6;
+  padding: 15px;
+  width: 620px;
+  text-align: center;
 }
 
 .tasks {
@@ -147,12 +156,19 @@ padding: 10px;
 }
 
 .card {
-  background-color: darkgray;
+  background-color: #2dd4bf;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  height: 150px;
+  align-items: center;
+  height: 50px;
   padding: 3px;
   margin: 5px;
   border: 2px white solid;
+}
+
+.cardPriority {
+  width: 10px;
+  height: 15px;
+  border-radius: 3px;
 }

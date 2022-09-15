@@ -1,5 +1,4 @@
-import { compareTasks } from "../model/model";
-import { uiUpdateTasks } from "../controller/";
+import { uiUpdateTasks } from "../controller/controller";
 
 const content = document.querySelector('.content');
 const tasks = document.querySelector('.tasks');
@@ -14,10 +13,7 @@ function removeAllChildren(elementToRemoveFrom) {
     }
 }
 
-function sortSmallToBig(project) {
-    project.sort(compareTasks);
 
-}
 
 function uiAppendTask(modelTask, index) {
 
@@ -25,41 +21,56 @@ function uiAppendTask(modelTask, index) {
     card.className = 'card';
     card.id = 'card' + index;
 
+    let priority = document.createElement('div');
+    priority.className = 'cardPriority';
+    priority.id = 'cardPriority' + index;
     if (modelTask.taskPriority === '1') {
-        card.style.border = '2px solid red';
+        priority.style.backgroundColor = 'red';
     }
     else if (modelTask.taskPriority === '2') {
-        card.style.border = '2px solid yellow';
+        priority.style.backgroundColor = 'yellow';
     }
+    else if (modelTask.taskPriority === '3') {
+        priority.style.backgroundColor = 'green';
+    }
+    card.appendChild(priority);
 
     let title = document.createElement('div');
-    title.textContent = `Title: ${modelTask.taskTitle}`;
+    title.textContent = `${modelTask.taskTitle}`;
     title.className = 'cardTitle';
+    title.id = 'cardTitle' + index;
     card.appendChild(title);
 
     let description = document.createElement('div');
-    description.textContent = `Description: ${modelTask.taskDescription}`;
+    description.textContent = `${modelTask.taskDescription}`;
     description.className = 'cardDescription';
+    description.id = 'cardDescription' + index;
+    description.style.display = 'none'
     card.appendChild(description);
 
-    let priority = document.createElement('div');
-    priority.textContent = `Priority: ${modelTask.taskPriority}`;
-    priority.className = 'cardPriority';
-    card.appendChild(priority);
-
     let dateTime = document.createElement('div');
-    dateTime.textContent = `Time and Date: ${modelTask.taskTimeDate}`;
+    dateTime.textContent = `${modelTask.taskTimeDate}`;
     dateTime.className = 'cardDateTime';
+    dateTime.id = 'cardDateTime' + index;
+    dateTime.style.display = 'none'
     card.appendChild(dateTime);
 
-    tasks.appendChild(card);
 
     let btn = document.createElement('button');
     btn.className = 'rmTaskBtn';
-    btn.textContent = 'Remove Task';
+    btn.textContent = 'Remove';
     btn.id = 'rmTaskbtn' + index;
+    btn.style.display = 'none'
     card.appendChild(btn);
 
+    let editBtn = document.createElement('button');
+    editBtn.className = 'editTaskBtn';
+    editBtn.textContent = 'Edit';
+    editBtn.id = 'editTaskBtn' + index;
+    editBtn.style.display = 'none';  
+    card.appendChild(editBtn);
+
+    tasks.appendChild(card);
 
 }
 
@@ -82,33 +93,32 @@ function uiAppendProjects(projectCollection) {
 
         
         projectListElement.addEventListener('click', () => {
-            projectCollection[i].forEach((element, i) => {
-                uiAppendTask(element, i);
-            })
+            uiUpdateTasks(projectCollection[i].project);
+            uiCreateProjectInfo(projectCollection[i]);
         });
 
         projectList.appendChild(projectListElement);
     }
 }
 
-/* uiAppendTask(project[i].project);
+function uiCreateProjectInfo(project) {
+    removeAllChildren(divForm);
 
     let projectContainer = document.createElement('div');
     let projectDisplayedName = document.createElement('div');
     let projectDisplayedDescr = document.createElement('p');
 
     projectContainer.className = 'projectContainer';
-    divForm.innerHTML = '';
 
 
-    projectDisplayedName.textContent = project[i].name;
-    projectDisplayedDescr.textContent = project[i].description;
+    projectDisplayedName.textContent = project.name;
+    projectDisplayedDescr.textContent = project.description;
 
     projectContainer.appendChild(projectDisplayedName);
     projectContainer.appendChild(projectDisplayedDescr);
-    divForm.appendChild(projectContainer); */
+    divForm.appendChild(projectContainer); 
 
-
+}
 
 
 

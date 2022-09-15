@@ -1,5 +1,6 @@
-import { modelNewProject, modelNewTask, modelEditProject, getProjectCollection } from '../model/model';
+import { modelNewProject, modelNewTask, modelEditProject, getProjectCollection, compareTasks } from '../model/model';
 import { uiAppendProjects, removeAllChildren, uiAppendTask, uiCreateTaskForm, uiProjectForm } from '../view/htmlGenerator';
+import { uiVisibleDetailsToggle } from './uiController';
 import { saveCheck } from './saveController';
 
 
@@ -20,13 +21,23 @@ function controllerCreateTask(modelTaskTitle, modelTaskDescription, modelTaskPri
 
 }
 
+
 function uiUpdateTasks(modelProject) {
     removeAllChildren(document.querySelector('.tasks'));
+    sortSmallToBig(modelProject);
     modelProject.forEach(function (element, i) {
         uiAppendTask(element, i);
+
+        let card = document.querySelector('#card' + i);
+        card.addEventListener('click', () => {
+            uiVisibleDetailsToggle(i);
+        });
+
+
+
+
         let btn = document.querySelector('#rmTaskbtn' + i);
         btn.addEventListener('click', () => {
-
             modelProject.splice(i, 1);
             document.querySelector('.tasks').removeChild(document.querySelector('#card' + i));
         });
@@ -79,6 +90,9 @@ function uiCreateTaskFormEvent() {
     });
 }
 
+function sortSmallToBig(project) {
+    project.sort(compareTasks);
+}
 
 
 //*** Project functions ***
