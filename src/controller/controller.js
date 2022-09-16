@@ -30,7 +30,7 @@ function uiUpdateTasks(modelProject) {
 
         let card = document.querySelector('#card' + i);
         card.addEventListener('click', function(e) {
-            if (e.target !== this)
+            if (e.target == document.querySelector('.rmTaskBtn') || e.target == document.querySelector('.editTaskBtn'))
             return;
             uiVisibleDetailsToggle(i);
         });
