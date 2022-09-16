@@ -16,21 +16,6 @@ function toggleHideProjectsEvent() {
 
 }
 
-
-
-
-
-    
-    
-
-
-
-
-
-
-
-
-
 function initEvents() {
     
     toggleHideProjectsEvent();

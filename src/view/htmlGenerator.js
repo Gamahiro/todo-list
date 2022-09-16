@@ -39,6 +39,7 @@ function uiAppendTask(modelTask, index) {
     title.textContent = `${modelTask.taskTitle}`;
     title.className = 'cardTitle';
     title.id = 'cardTitle' + index;
+    title.style.fontWeight = '900';
     card.appendChild(title);
 
     let description = document.createElement('div');
@@ -120,6 +121,70 @@ function uiCreateProjectInfo(project) {
 
 }
 
+function uiCreateEditTaskForm(index, taskTitle, taskDescription, taskPriority, taskTimeDate) {
+    
+    let cardEditForm = document.createElement('form')
+    cardEditForm.id = 'cardEditForm' + index;
+    cardEditForm.className = 'cardEditForm';
+
+    let inputTitle = document.createElement('input');
+    inputTitle.type = 'text';
+    inputTitle.id = 'title';
+    inputTitle.name = 'title';
+    inputTitle.value = taskTitle;
+    inputTitle.required = true;
+
+
+    let inputDescription = document.createElement('input');
+    inputDescription.type = 'text';
+    inputDescription.id = 'description';
+    inputDescription.name = 'description';
+    inputDescription.value = taskDescription;
+
+    let selectPriority = document.createElement('select');
+    selectPriority.id = 'priority';
+    selectPriority.name = 'priority';
+    selectPriority.value = taskPriority;
+
+    let priorityOption1 = document.createElement('option');
+    priorityOption1.value = '1';
+    priorityOption1.textContent = '1';
+
+    let priorityOption2 = document.createElement('option');
+    priorityOption2.value = '2';
+    priorityOption2.textContent = '2';
+
+    let priorityOption3 = document.createElement('option');
+    priorityOption3.value = '3';
+    priorityOption3.textContent = '3';
+
+    selectPriority.appendChild(priorityOption1);
+    selectPriority.appendChild(priorityOption2);
+    selectPriority.appendChild(priorityOption3);
+
+    let inputDateTime = document.createElement('input');
+    inputDateTime.type = 'datetime-local';
+    inputDateTime.id = 'dateTime';
+    inputDateTime.name = 'dateTime';
+    inputDateTime.value = taskTimeDate;
+
+
+    
+
+    let submitBtn = document.createElement('input');
+    submitBtn.type = 'submit';
+    submitBtn.value = 'Submit';
+    submitBtn.id = 'submitEditForm';
+
+    cardEditForm.appendChild(inputTitle);
+    cardEditForm.appendChild(inputDescription);
+    cardEditForm.appendChild(selectPriority);
+    cardEditForm.appendChild(inputDateTime);
+    cardEditForm.appendChild(submitBtn);
+
+    let card = document.querySelector(`#card${+ index}`);
+    card.appendChild(cardEditForm);
+}
 
 
 
@@ -252,4 +317,4 @@ function uiProjectForm() {
     
 }
 
-export { uiAppendProjects, removeAllChildren, uiAppendTask, uiFormCreateProjectOptions, uiCreateTaskForm, uiProjectForm }
+export { uiAppendProjects, removeAllChildren, uiAppendTask, uiFormCreateProjectOptions, uiCreateTaskForm, uiProjectForm, uiCreateEditTaskForm }

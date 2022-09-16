@@ -46,8 +46,12 @@ function modelNewTask(taskTitle, taskDescription, taskPriority, taskTimeDate, pr
     saveProjectCollection();
 }
 
-function modelEditTask(modelTaskObject, newTaskTitle, newTaskDescription, newTaskPriority, newTaskTimeDate, newAssignedProject) {
+function modelEditTask(modelTaskObject, newTaskTitle, newTaskDescription, newTaskPriority, newTaskTimeDate) {
 
+    modelTaskObject.taskTitle = newTaskTitle;
+    modelTaskObject.taskDescription = newTaskDescription;
+    modelTaskObject.taskPriority = newTaskPriority;
+    modelTaskObject.taskTimeDate = newTaskTimeDate;
 
 }
 
@@ -64,4 +68,4 @@ function compareTasks(taskA, taskB) {
     return 0;
 }
 
-export {modelNewProject, modelNewTask, modelEditProject, compareTasks, saveProjectCollection, loadProjectCollection, getProjectCollection};
+export {modelNewProject, modelNewTask, modelEditProject, modelEditTask, compareTasks, saveProjectCollection, loadProjectCollection, getProjectCollection};

@@ -1,5 +1,5 @@
-import { modelNewProject, modelNewTask, modelEditProject, getProjectCollection, compareTasks, saveProjectCollection } from '../model/model';
-import { uiAppendProjects, removeAllChildren, uiAppendTask, uiCreateTaskForm, uiProjectForm } from '../view/htmlGenerator';
+import { modelNewProject, modelNewTask, modelEditTask, modelEditProject, getProjectCollection, compareTasks, saveProjectCollection } from '../model/model';
+import { uiAppendProjects, removeAllChildren, uiAppendTask, uiCreateTaskForm, uiProjectForm, uiCreateEditTaskForm } from '../view/htmlGenerator';
 import { uiVisibleDetailsToggle } from './uiController';
 import { saveCheck } from './saveController';
 
@@ -30,21 +30,44 @@ function uiUpdateTasks(modelProject) {
 
         let card = document.querySelector('#card' + i);
         card.addEventListener('click', function(e) {
-            if (e.target == document.querySelector('.rmTaskBtn') || e.target == document.querySelector('.editTaskBtn'))
+            if (e.target !== this/* document.querySelector('.rmTaskBtn') || e.target == document.querySelector('.editTaskBtn') */)
             return;
             uiVisibleDetailsToggle(i);
         });
 
+        let editBtn = document.querySelector('#editTaskBtn' + i)
+        editBtn.addEventListener('click', () => {
+
+            removeAllChildren(document.querySelector('#card' + i));
+            uiCreateEditTaskForm(i, element.taskTitle, element.taskDescription, element.taskPriority, element.taskTimeDate);
+            uiEditTaskFormSubmitEvent(element, modelProject, i);
+            saveProjectCollection();
+        });
 
 
-
-        let btn = document.querySelector('#rmTaskbtn' + i);
-        btn.addEventListener('click', () => {
+        let rmBtn = document.querySelector('#rmTaskbtn' + i);
+        rmBtn.addEventListener('click', () => {
             modelProject.splice(i, 1);
             document.querySelector('.tasks').removeChild(document.querySelector('#card' + i));
             saveProjectCollection();
         });
     });
+}
+function uiEditTaskFormSubmitEvent(modelTaskObject, modelProject, i) {
+    document.querySelector('#card' + i).onsubmit = function (e) {
+
+        e.preventDefault();
+
+        modelEditTask(
+            modelTaskObject,
+            document.querySelector('#title').value,
+            document.querySelector('#description').value,
+            document.querySelector('#priority').value,
+            document.querySelector('#dateTime').value
+            );
+
+            uiUpdateTasks(modelProject);
+    }
 }
 
 //submitevent creates new modelTask
@@ -149,6 +172,7 @@ function controllerInit() {
     uiCreateTaskFormEvent();
     uiCreateProjectFormEvent();
     showProjectsBtnInit();
+    
 };
 
 

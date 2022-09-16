@@ -1,3 +1,4 @@
+import { uiCreateEditTaskForm } from "../view/htmlGenerator";
 
 //@todo create a popup element in center of the screen and append the details of the clicked task element
 
@@ -9,6 +10,7 @@ function uiVisibleDetailsToggle(i) {
     let rmTaskBtn = document.querySelector('#rmTaskbtn' + i);
     let editBtn = document.querySelector('#editTaskBtn' + i);
 
+    
 
     if(document.querySelector('#cardDescription' + i).style.display === 'none') {
         card.style.transform = 'scale(1.50)';
