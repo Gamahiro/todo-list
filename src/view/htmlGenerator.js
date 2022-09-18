@@ -101,7 +101,7 @@ function uiAppendProjects(projectCollection) {
         projectListElement.addEventListener('click', () => {
             uiUpdateTasks(projectCollection[i].project);
             uiCreateProjectInfo(projectCollection[i]);
-            projectSettingsBtn();
+            projectSettingsBtn(projectCollection[i]);
         });
 
         projectList.appendChild(projectListElement);
@@ -122,8 +122,9 @@ function uiCreateProjectInfo(project) {
     projectDisplayedDescr.textContent = project.description;
 
     let settingsBtn = document.createElement('button');
-    settingsBtn.className = 'projectSettingsBtn';
-    settingsBtn.textContent = 'Settings';
+    settingsBtn.className = 'material-icons';
+    settingsBtn.id = 'projectSettingsBtn'
+    settingsBtn.textContent = 'settings';
 
     projectContainer.appendChild(settingsBtn);
     projectContainer.appendChild(projectDisplayedName);
@@ -290,6 +291,43 @@ function uiCreateTaskForm() {
 
 }
 
+function uiEditProjectForm(project) {
+    let projectForm = document.createElement('form');
+    projectForm.id = 'projectForm';
+
+    let labelTitle = document.createElement('label');
+    labelTitle.for = 'title';
+    labelTitle.textContent = 'Title:';
+
+    let inputTitle = document.createElement('input');
+    inputTitle.type = 'text';
+    inputTitle.id = 'title';
+    inputTitle.name = 'title';
+    inputTitle.value = project.name;
+    inputTitle.required = true;
+
+    let labelDescription = document.createElement('label');
+    labelDescription.for = 'description';
+    labelDescription.textContent = 'Description';
+
+    let inputDescription = document.createElement('input');
+    inputDescription.type = 'text';
+    inputDescription.id = 'description';
+    inputDescription.name = 'description';
+    inputDescription.value = project.description;
+
+    let submitBtn = document.createElement('input');
+    submitBtn.type = 'submit';
+    submitBtn.value = 'Submit';
+    submitBtn.id = 'submitForm';
+
+    projectForm.appendChild(labelTitle);
+    projectForm.appendChild(inputTitle);
+    projectForm.appendChild(labelDescription);
+    projectForm.appendChild(inputDescription);
+    projectForm.appendChild(submitBtn);   
+    document.querySelector('.divForm').appendChild(projectForm);
+}
 
 function uiProjectForm() {
     let projectForm = document.createElement('form');
@@ -328,4 +366,4 @@ function uiProjectForm() {
     
 }
 
-export { uiAppendProjects, removeAllChildren, uiAppendTask, uiFormCreateProjectOptions, uiCreateTaskForm, uiProjectForm, uiCreateEditTaskForm }
+export { uiAppendProjects, removeAllChildren, uiAppendTask, uiFormCreateProjectOptions, uiCreateTaskForm, uiProjectForm, uiCreateEditTaskForm, uiEditProjectForm, uiUpdateTasks, uiCreateProjectInfo }

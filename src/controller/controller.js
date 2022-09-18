@@ -8,6 +8,9 @@ import { uiCreateProjectFormEvent } from "./createProject";
 
 
 function sortSmallToBig(project) {
+    if (project[0] === undefined)
+    return;
+    
     project.sort(compareTasks);
 }
 

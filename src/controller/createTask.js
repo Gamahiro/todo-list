@@ -48,7 +48,7 @@ function controllerGenerateFormProjectOptions() {
 
 //event to create/append the taskform when addtask button clicked
 function uiCreateTaskFormEvent() {
-    document.querySelector('.addTask').addEventListener('click', () => {
+    document.querySelector('#addTask').addEventListener('click', () => {
         removeAllChildren(document.querySelector('.divForm'));
         uiCreateTaskForm();
         controllerGenerateFormProjectOptions();

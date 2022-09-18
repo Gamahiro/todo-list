@@ -1,9 +1,11 @@
-import { uiProjectForm, removeAllChildren } from "../view/htmlGenerator";
+import { uiEditProjectForm, removeAllChildren, uiAppendProjects, uiUpdateTasks, uiCreateProjectInfo } from "../view/htmlGenerator";
 import { modelEditProject, getProjectCollection } from "../model/model";
 
-function controllerEditProject(project, newName, newDescription) {
-    editedProject = modelEditProject(project, newName, newDescription);
-
+function controllerEditProject(project, newProjectName, newProjectDescription) {
+    modelEditProject(project, newProjectName, newProjectDescription);
+    uiAppendProjects(getProjectCollection());
+    uiUpdateTasks(project.project);
+    uiCreateProjectInfo(project);
 }
 
 
@@ -16,7 +18,7 @@ function uiEditProjectFormSubmitEvent(project) {
         document.querySelector('#projectForm').onsubmit = function (e) {
             e.preventDefault();
 
-            modelEditProject(getProjectCollection().indexOf(''),
+            controllerEditProject(project,
                 document.querySelector('#title').value,
                 document.querySelector('#description').value);
         }
@@ -25,15 +27,18 @@ function uiEditProjectFormSubmitEvent(project) {
 
 }
 
-function uiEditProjectFormEvent() {
+function uiEditProjectFormEvent(project) {
     //selector edit btn.addeventlistener ....
     removeAllChildren(document.querySelector('.divForm'));
-    uiProjectForm(); //check if works
-    uiEditProjectFormSubmitEvent()
+    uiEditProjectForm(project); 
+    uiEditProjectFormSubmitEvent(project)
 }
 
-function projectSettingsBtn() {
-    document.querySelector('.projectSettingsBtn').addEventListener('click', uiEditProjectFormEvent);
+function projectSettingsBtn(project) {
+    document.querySelector('#projectSettingsBtn').addEventListener('click', () => { 
+        uiEditProjectFormEvent(project)
+
+    });
 }
 
 export {projectSettingsBtn}

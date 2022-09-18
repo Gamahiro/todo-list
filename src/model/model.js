@@ -24,8 +24,8 @@ function modelNewProject(projectName, projectDescription) {
 }
 
 function modelEditProject(project, newProjectName, newProjectDescription) {
-    project.name = newName;
-    project.description = newDescription;
+    project.name = newProjectName;
+    project.description = newProjectDescription;
     saveProjectCollection();
     return project;
 }
