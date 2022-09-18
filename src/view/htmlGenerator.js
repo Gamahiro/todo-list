@@ -1,4 +1,5 @@
-import { uiUpdateTasks } from "../controller/controller";
+import { projectSettingsBtn } from "../controller/updateProject";
+import { uiUpdateTasks } from "../controller/updateTask";
 
 const content = document.querySelector('.content');
 const tasks = document.querySelector('.tasks');
@@ -56,21 +57,25 @@ function uiAppendTask(modelTask, index) {
     dateTime.style.display = 'none'
     card.appendChild(dateTime);
 
+    let btnContainer = document.createElement('div');
+    btnContainer.className = 'btnContainer';
+    btnContainer.style.display = 'flex';
 
     let btn = document.createElement('button');
-    btn.className = 'rmTaskBtn';
-    btn.textContent = 'Remove';
+    btn.className = 'material-icons';
+    btn.textContent = 'delete';
     btn.id = 'rmTaskbtn' + index;
     btn.style.display = 'none'
-    card.appendChild(btn);
+    btnContainer.appendChild(btn);
 
     let editBtn = document.createElement('button');
-    editBtn.className = 'editTaskBtn';
-    editBtn.textContent = 'Edit';
+    editBtn.className = 'material-icons';
+    editBtn.textContent = 'settings';
     editBtn.id = 'editTaskBtn' + index;
     editBtn.style.display = 'none';  
-    card.appendChild(editBtn);
+    btnContainer.appendChild(editBtn);
 
+    card.appendChild(btnContainer);
     tasks.appendChild(card);
 
 }
@@ -96,6 +101,7 @@ function uiAppendProjects(projectCollection) {
         projectListElement.addEventListener('click', () => {
             uiUpdateTasks(projectCollection[i].project);
             uiCreateProjectInfo(projectCollection[i]);
+            projectSettingsBtn();
         });
 
         projectList.appendChild(projectListElement);
@@ -115,6 +121,11 @@ function uiCreateProjectInfo(project) {
     projectDisplayedName.textContent = project.name;
     projectDisplayedDescr.textContent = project.description;
 
+    let settingsBtn = document.createElement('button');
+    settingsBtn.className = 'projectSettingsBtn';
+    settingsBtn.textContent = 'Settings';
+
+    projectContainer.appendChild(settingsBtn);
     projectContainer.appendChild(projectDisplayedName);
     projectContainer.appendChild(projectDisplayedDescr);
     divForm.appendChild(projectContainer); 

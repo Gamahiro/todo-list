@@ -21,4 +21,5 @@ function initEvents() {
     toggleHideProjectsEvent();
 }
 
+
 export {initEvents}

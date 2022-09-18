@@ -23,13 +23,7 @@ function modelNewProject(projectName, projectDescription) {
     return newProject;
 }
 
-function modelEditProject(project, newName, newDescription) {
-    if (newName === undefined) {
-        newName = project.name;
-    }
-    if (newDescription === undefined) {
-        newDescription = project.description;
-    }
+function modelEditProject(project, newProjectName, newProjectDescription) {
     project.name = newName;
     project.description = newDescription;
     saveProjectCollection();
