@@ -1,5 +1,5 @@
 import { uiEditProjectForm, removeAllChildren, uiAppendProjects, uiUpdateTasks, uiCreateProjectInfo } from "../view/htmlGenerator";
-import { modelEditProject, getProjectCollection } from "../model/model";
+import { modelEditProject, getProjectCollection, removeProjectCollectionElement } from "../model/model";
 
 function controllerEditProject(project, newProjectName, newProjectDescription) {
     modelEditProject(project, newProjectName, newProjectDescription);
@@ -30,15 +30,43 @@ function uiEditProjectFormSubmitEvent(project) {
 function uiEditProjectFormEvent(project) {
     //selector edit btn.addeventlistener ....
     removeAllChildren(document.querySelector('.divForm'));
-    uiEditProjectForm(project); 
+    uiEditProjectForm(project);
     uiEditProjectFormSubmitEvent(project)
 }
 
-function projectSettingsBtn(project) {
-    document.querySelector('#projectSettingsBtn').addEventListener('click', () => { 
+function projectEditBtn(project) {
+    projectSettingsBtn();
+    deleteProjectBtn(project);
+    document.querySelector('#projectEditBtn').addEventListener('click', () => {
         uiEditProjectFormEvent(project)
 
     });
 }
 
-export {projectSettingsBtn}
+function deleteProjectBtn(project) {
+    document.querySelector('#projectDeleteBtn').addEventListener('click', () => {
+        let projectToDelete = getProjectCollection().indexOf(project);
+        removeProjectCollectionElement(projectToDelete);
+        uiAppendProjects(getProjectCollection());
+    })
+}
+
+function projectSettingsBtn() {
+    document.querySelector('#projectSettingsBtn').addEventListener('click', toggleProjectSettings)
+}
+
+
+function toggleProjectSettings() {
+    let buttonContainer = document.querySelector('#projectButtonsContainer');
+
+    if (buttonContainer.style.display === 'none') {
+        buttonContainer.style.display = 'block';
+    } else {
+        buttonContainer.style.display = 'none';
+    }
+
+
+
+}
+
+export { projectEditBtn }

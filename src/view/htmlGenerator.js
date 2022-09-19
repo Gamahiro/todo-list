@@ -1,4 +1,4 @@
-import { projectSettingsBtn } from "../controller/updateProject";
+import { projectEditBtn } from "../controller/updateProject";
 import { uiUpdateTasks } from "../controller/updateTask";
 
 const content = document.querySelector('.content');
@@ -101,7 +101,7 @@ function uiAppendProjects(projectCollection) {
         projectListElement.addEventListener('click', () => {
             uiUpdateTasks(projectCollection[i].project);
             uiCreateProjectInfo(projectCollection[i]);
-            projectSettingsBtn(projectCollection[i]);
+            projectEditBtn(projectCollection[i]);
         });
 
         projectList.appendChild(projectListElement);
@@ -121,12 +121,30 @@ function uiCreateProjectInfo(project) {
     projectDisplayedName.textContent = project.name;
     projectDisplayedDescr.textContent = project.description;
 
+    let buttonContainer = document.createElement('div');
+    buttonContainer.id = 'projectButtonsContainer';
+    buttonContainer.style.display = 'none';
+
     let settingsBtn = document.createElement('button');
     settingsBtn.className = 'material-icons';
-    settingsBtn.id = 'projectSettingsBtn'
+    settingsBtn.id = 'projectSettingsBtn';
     settingsBtn.textContent = 'settings';
 
+    let deleteBtn = document.createElement('button');
+    deleteBtn.className = 'material-icons';
+    deleteBtn.id = 'projectDeleteBtn';
+    deleteBtn.textContent = 'delete';
+
+    let editBtn = document.createElement('button');
+    editBtn.className = 'material-icons';
+    editBtn.id = 'projectEditBtn'
+    editBtn.textContent = 'edit';
+
+    buttonContainer.appendChild(editBtn);
+    buttonContainer.appendChild(deleteBtn);
+
     projectContainer.appendChild(settingsBtn);
+    projectContainer.appendChild(buttonContainer);
     projectContainer.appendChild(projectDisplayedName);
     projectContainer.appendChild(projectDisplayedDescr);
     divForm.appendChild(projectContainer); 

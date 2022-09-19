@@ -8,6 +8,10 @@ function getProjectCollection() {
     return projectCollection;
 }
 
+function removeProjectCollectionElement(index) {
+    projectCollection.splice(index, 1);
+}
+
 function saveProjectCollection() {
 save(projectCollection);
 }
@@ -62,4 +66,4 @@ function compareTasks(taskA, taskB) {
     return 0;
 }
 
-export {modelNewProject, modelNewTask, modelEditProject, modelEditTask, compareTasks, saveProjectCollection, loadProjectCollection, getProjectCollection};
+export {modelNewProject, modelNewTask, modelEditProject, modelEditTask, compareTasks, saveProjectCollection, loadProjectCollection, getProjectCollection, removeProjectCollectionElement};

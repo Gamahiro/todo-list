@@ -1,4 +1,3 @@
-import { uiCreateEditTaskForm } from "../view/htmlGenerator";
 
 //@todo create a popup element in center of the screen and append the details of the clicked task element
 
@@ -32,6 +31,7 @@ function uiVisibleDetailsToggle(i) {
     }
     
 }
+
 
 
 export {uiVisibleDetailsToggle}
