@@ -70,7 +70,7 @@ function uiAppendTask(modelTask, index) {
 
     let editBtn = document.createElement('button');
     editBtn.className = 'material-icons';
-    editBtn.textContent = 'settings';
+    editBtn.textContent = 'edit';
     editBtn.id = 'editTaskBtn' + index;
     editBtn.style.display = 'none';  
     btnContainer.appendChild(editBtn);

@@ -1,5 +1,5 @@
 import { uiEditProjectForm, removeAllChildren, uiAppendProjects, uiUpdateTasks, uiCreateProjectInfo } from "../view/htmlGenerator";
-import { modelEditProject, getProjectCollection, removeProjectCollectionElement } from "../model/model";
+import { modelEditProject, getProjectCollection, removeProjectCollectionElement, saveProjectCollection } from "../model/model";
 
 function controllerEditProject(project, newProjectName, newProjectDescription) {
     modelEditProject(project, newProjectName, newProjectDescription);
@@ -48,6 +48,7 @@ function deleteProjectBtn(project) {
         let projectToDelete = getProjectCollection().indexOf(project);
         removeProjectCollectionElement(projectToDelete);
         uiAppendProjects(getProjectCollection());
+        saveProjectCollection();
     })
 }
 

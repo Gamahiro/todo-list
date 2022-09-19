@@ -1,3 +1,10 @@
+import { toggleDarkMode } from "../view/darkmode";
+
+function darkmodeEvent () {
+    document.querySelector('#toggleDarkMode').addEventListener('click', toggleDarkMode);
+}
+
+
 function toggleHideProjectsEvent() {
     document.querySelector('#projectsBtn').addEventListener('click', function (e) {
 
@@ -17,7 +24,7 @@ function toggleHideProjectsEvent() {
 }
 
 function initEvents() {
-    
+    darkmodeEvent();
     toggleHideProjectsEvent();
 }
 
